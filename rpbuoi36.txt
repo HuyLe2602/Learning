@@ -1,0 +1,22 @@
+-BigO là 1 cách đo lường mức độ hiệu quả của các bộ code với nhau
+
+-Ví dụ: 	Có bộ code 1 và bộ code 2. 
+	Code 1 dễ đọc hơn, bộ code 2 ngắn gọn hơn 
+	Cả 2 bộ đều viết đúng cùng 1 mục đích nhưng cho ra thời gian chạy khác nhau
+	Thì kết quả cho về là bộ code 2 Hiệu quả hơn
+	Nhưng nó xét trên yếu tố là TimeComplexity cùng bộ máy cùng cấu hình máy cái nào tốn ít thao tác hơn
+	Ngoài ra còn có yếu tố SpaceComlexity cái nào tốn ít bộ nhớ hơn
+
+
+-Khi nói về độ phức tạp thời gian (TimeComplexity) ta có:
+-Trong trường hợp:
+	-Tốt Nhất là omega 
+	-Trung bình là theta
+	-Xấu nhất là omicron
+
+-O(n) trên đồ thị là 1 đường thẳng vì nó là trường hợp xấu nhất đó chính là tỉ lệ thuận khi thay 
+
+-Trong BigO có cách để đơn giả hoá mọi thứ:
+	-Hằng số thả là tối ưu O(n) Ví dụ:
+		Trong lệnh for có 2 vòng lặp n của i và j thì theo lí thuyết sẽ là O(2n) nhưng tôi ưu thành O(n) dù hằng số là bao nhiêu
+-Vòng lặp for lồng nhau gọi là O(n*n) so với O(n) thì O(n^2) tăng nhanh hơn thì xét về mặt độ phức tạp của thời gian thì nó kém hiệu quả hơn

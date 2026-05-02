@@ -1,0 +1,37 @@
+1.Khi trong vòng lặp for có O(n^2) trước và O(n) sau thì ta sẽ có:O(n^2+n)
+
+-Nhưng khi O(n^2) với n quá lớn thì n độc lập trước đó sẽ trở nên không liên quan(Non- Dominants) và tối ưu về còn O(n^2)
+
+2. Trong 1 hàm có trả về là n+n  hoặc n+n+...+n thì ta đưa về dạng O(1) dù n tang bao nhiêu thì số phép tính vẫn không đổi
+-Trong biểu đồ thì O(1) sẽ biểu thị là trục x với O(n) là trục z 
+-O(1) được biểu thị là hiệu quả lớn nhất
+
+3. O(log n) là cách tối ưu nhất khi ta muốn tìm 1 phần tử trong 1 tập lớn bang cách chia cho 2
+-Trong biểu đồ thì O(log n) được biểu thị dưới dạng rất gần với O(1)
+
+4.Các thuật ngư trong vòng lặp rất quan trọng ví dụ:
+-Có vòng lặp truyền vào tham số a thì là O(a)
+-Sau đó là vòng lặp tham số b thì là O(b) 
+-Nếu 2 vòng lặp độc lập thực hiện ta gọi là O(a+b)
+-Nhưng nếu lồng vào nhau thì gọi là O(a*b) 
+-Với điều kiện a và b khác nhau thì không thể họp và gọi là O(n)
+
+5.Khi add 1 phần tử vào arraylist nó sẽ ở thứ tự mới nhất nhưng muốn xoá 1 phần tử thì phải truyền vào số thứ tự của phần tử đó
+-Nếu xoá phần tử ở vị trí 0 thì vị trí 1 mở hiện tại trở thành 0 và các vị trí khác sẽ tự động -1
+-Nếu muốn them 1 cách chỉ định thì ta truyền vào số thứ tự rồi dấu "," rồi đến giá trị của phần tử các phần tử sau đó sẽ tự động +1 ở số thứ tự
+-Phần tử chèn cũng tương tự thêm vào nhưng có thể nói nó là O(1/2 n)
+-Nhưng O(n) là trường hợp tệ nhất cho nên 1/2 của n vẫn là hằng số thì lúc đó lại trở về thành O(n)
+-Nếu muốn tìm phần tử bất kỳ thì phải di chuyển đến khi có giá trị đó theo cách so sánh thì gọi là O(n)
+-Nhưng nếu tìm theo số thứ tự phần tử thì sẽ nhanh hơn và được gọi là O(1)
+
+6.Nếu cho n=100 thì ta sẽ có:
+			-O(1) = 1
+			-O(log n) xấp xỉ bang 7
+			-O(n) =100
+			-O(n^2)=10000
+Chốt lại O(n^2) sẽ là phương án tệ nhất và sẽ tệ hơn các O khác nếu n tang lớn hơn và ta có những định nghía sau:
+-O(n^2) là vòng lặp lồng nhau
+-O(n) tỉ lệ thuận với nhau
+-O(log n) chia để trị 
+-O(1) là thời gian hằng số
+Nếu cải thiện bài code từ O(n^2) qua thành O(n) sẽ là 1 bước tiến lớn đối với việc viết code
