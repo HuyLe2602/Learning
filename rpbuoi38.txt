@@ -1,0 +1,26 @@
+1, Class là tập hợp các thuộc tính và phương thức(có thể xem là hành động của đối tượng) của đối tượng bất kỳ
+-Bên trong class sẽ có các phương thức và phương thức đầu tiên được tạo ra gọi là hàm tạo
+-Phương thức get là gọi ra thuộc tính của đối tượng
+-Phương thức set là đặt giá trị thuộc tính cho đối tượng
+-Lớp đó là lớp khác main thường được tạo ra dối tượng
+-Đối tượng đó sẽ gọi phương thức bằng cách tên biến + "." + phương thức
+
+2.Hashmap chỉ được xuất hiện khi có 1 biến trỏ tới giá và nếu không có biến nào trỏ tới thì sẽ tự động bị xoá
+-Nếu có nhiều biến trỏ về 1 hashmap thì khi có 1 biến bất kỳ dung nút thì tất cả biến đều mang giá trị vừa sửa đổi
+
+3.Trong linked list sẽ có con trỏ và mọi con trỏ sẽ chỉ tới giá trị khác nhưng chung quy giá trị cuối cùng là null
+
+4.linked list thường được so sánh với arraylist nhưng điểm khác biệt ở chỗ là:
+-LinkedList có độ dài và rộng trong khi Arraylist chỉ có độ dài cố định và LinkedList không có mục cụ thể(stt) going với arraylist
+-LinkedList thay vì tất cả nằm 1 vị trí liền kề trong bộ nhớ thì chúng lại phân tán ra
+-LinkedList có nút đầu tiên gọi là head, cuối cùng gọi là tail
+-Head, tail chỉ là con trỏ trỏ đến các nút
+-Các nút trỏ đến nhau đến khi kết thúc
+-Về thứ tự thì các nút nằm không có trật tự nhất định chỉ có trỏ đến phần tử tiếp theo rất lộn xộn
+
+5.Giá trị của các nút trong Linked List có thể xem là O(n) và giá trị cuối gọi là O(1)
+-Khi nút cuối cùng trong LinkedList bị mất thì nút kề cuối sẽ đảm nhiệm vị trí Tail  (1)
+-Khi nút mới được thêm vào đầu linkedlist thì nút mới đó được đảm nhiệm vị trí Head  (2)
+-Khi muốn thêm nút vào giữa LinkedList thì ta cần phải cho nút mới trỏ tới nút đằng sau và nút đằng trước đó phải trỏ vào nút mới  (3)
+
+-Với (1) và (3) thì tất cả đều lặp lại nên sẽ là O(n) những (2) chỉ được xem là O(1)
