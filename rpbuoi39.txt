@@ -1,0 +1,30 @@
+ -Trong tất cả các hàm đều chứa cùng 1 tham số truyền vào sẽ tạo ra nút chung chức năng ta có thể gom tất cả nút thành 1 lớp
+-Trong trường hợp hàm cần tạo nút ta có thể gọi lớp nút ra
+-class Nút có trình bày như sau
+class Node{
+		int value;   //this.value
+		Node next; //Biến có kiểu là node có nghĩa là con trỏ chỉ tới 1 node
+		Node(int value){
+			this.value= value;   // value = int value
+			
+		}
+	  }
+Cách tạo ra node mới:
+		Node newNode = new Node(int value);
+	-với Node là lớp, newNode là tên biến, new Node(value) là hàm khởi tạo để tạo node mới có tên là newNode
+Ta có 1 lớp LinkedList tạo ra node tên newNode như sau:
+
+public class LinkedList{
+	private Node head;
+	private Node tail;
+	private int length;
+
+public LinkedList(int value){
+	Node newNode = new Node(int value);
+	head = newNode;
+	tail = newNode;
+	length = 1;
+}
+}
+
+-Code bài tập
