@@ -3,9 +3,20 @@
 public class Main {
 
     public static void main(String[] args) {
-        LinkedList linkedList = new LinkedList(10);
-        linkedList.printAll();
-        linkedList.printList();
+        LinkedList mylinkedList = new LinkedList(10);
+        mylinkedList.printAll();
+        mylinkedList.printList();
+
+        mylinkedList.append(2);
+
+
+        //return 2 node
+        System.out.println(mylinkedList.removeLast().value);
+        //return 1 node
+        System.out.println(mylinkedList.removeLast().value);
+        //return null
+        System.out.println(mylinkedList.removeLast());
+
 
     }
 }

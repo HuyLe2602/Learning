@@ -2,9 +2,9 @@
 
 class LinkedList {
 
-    private final Node head;
-    private final Node tail;
-    private final int length;
+    private Node head;
+    private Node tail;
+    private int length;
 
     static class Node {
         int value;
@@ -58,6 +58,51 @@ class LinkedList {
             printList();
         }
     }
+
+    //code them hom 5/5
+    public void append(int value) {
+        Node newNode = new Node(value);
+        if (length == 0) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail.next = newNode;
+            tail = newNode;
+        }
+        length++;
+    }
+
+    Node temp = head;
+    Node pre = head;
+
+    public Node removeLast() {
+        if (length == 0) return null;
+        while (temp.next != null) {
+            pre = temp;
+            temp = temp.next;
+        }
+        tail = pre;
+        tail.next = null;
+        length--;
+        if (length == 0) {
+            head = null;
+            tail = null;
+        }
+        return temp;
+    }
+
+    public void prepend(int value) {
+        Node newNode = new Node(value);
+        if (length == 0) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            newNode.next = head;
+            head = newNode;
+        }
+        length++;
+    }
+
 
 }
 

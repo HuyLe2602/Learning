@@ -1,0 +1,5 @@
+-Phương Thức append là thêm một phần tử mới vào cuối dánh sách hoặc chuỗi dữ lieu
+-Chỉ thêm 1 phần tử duy nhất mỗi lần gọi
+-Trong Linked List thì con trỏ chỉ tới là next và nút là {value = ...}
+-Khi next = null thì đó là tail của Linked List
+- Muốn viết nút có head và tail cùng trỏ tới trước tiên cần kiểm tra có linked list có rỗng k
