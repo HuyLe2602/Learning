@@ -1,0 +1,21 @@
+1.Trong LinkedList không thể lấy nút thứ tự bé hơn 0 và lớn hơn hoặc bằng độ dài
+
+2.Phương thức get là truyền vào giá trị sau đó sẽ trả về nút có giá trị tương ứng
+
+3.Phương thức set là thiết lập giá trị ở vị trí tương ứng một cách cụ thể
+
+4.Phương thức insert là phương thức chèn và phải dung append và trả về dạng false(Boolean)
+
+-Nếu dung ở giữa LinkedList cần phải nối 2 nút trước sau nút được chèn bằng con trỏ và tăng đồ dài của LinkList lên 1 đơn vị
+
+5.Phương thức remove là phương thức xoá nút có dạng trả về là Node
+
+-Nếu dùng ở giữa LinkedList thì ta sẽ nối con trỏ của 2 nút trước sau lại với nhau sau đó giảm độ dài của LinkList đi 1 đơn vị
+
+6.Phương thức reverse là phương thức đảo ngược LinkedList 
+
+-Trước tiên phải gắn temp cho head, head cho tail và tail cho temp(đổi đầu)
+-Temp ở đây đóng vài trò trung gian để giữ chỗ cho tail
+-Để lật ngược LinkedList ta gắn after và before làm trung gian cho các nút
+-Thực hiện vòng lặp for để lật ngược đế hết độ dài của LinkedList
+

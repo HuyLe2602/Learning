@@ -1,10 +1,9 @@
 ﻿package LinkedList;
-
 public class Main {
-
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         LinkedList mylinkedList = new LinkedList(10);
-        mylinkedList.printAll();
+        /*mylinkedList.printAll();
         mylinkedList.printList();
 
         mylinkedList.append(2);
@@ -15,8 +14,39 @@ public class Main {
         //return 1 node
         System.out.println(mylinkedList.removeLast().value);
         //return null
-        System.out.println(mylinkedList.removeLast());
+        System.out.println(mylinkedList.removeLast());*/
 
 
+        //Main cua 6/5
+//        mylinkedList.append(1);
+//        mylinkedList.append(2);
+//        mylinkedList.append(3);
+//
+//        System.out.println(mylinkedList.get(2).value+ "\n");
+//
+//        mylinkedList.printList();
+
+/*        mylinkedList.append(3);
+        mylinkedList.append(23);
+        mylinkedList.append(7);
+
+        System.out.println(mylinkedList.set(2,5));
+
+        mylinkedList.printList();*/
+
+//        mylinkedList.append(3);
+//
+//        mylinkedList.insert(1, 1);
+//
+//        mylinkedList.printList();
+
+        mylinkedList.append(3);
+        mylinkedList.append(23);
+        mylinkedList.append(7);
+
+        System.out.println(mylinkedList.remove(2));
+
+        mylinkedList.printList();
     }
 }
+
