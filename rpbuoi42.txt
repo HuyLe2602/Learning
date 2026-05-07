@@ -1,0 +1,26 @@
+1.Muốn tìm nút giữa thì ta dùng nhanh-chậm: nhanh 2 bước, chậm 1 bước
+
+-Khi nhanh đi tới cuối danh sách thì chậm sẽ ở nút giữa
+
+
+2.Muốn nhận biết LinkedList có vòng lặp hay không ta dung 
+
+-Nếu không có vòng lặp thì nhanh chạm null trước
+
+-Nếu có vòng lặp thì nhanh sẽ đuổi kịp chậm và 2 con trỏ sẽ gặp nhau trỏ vào 1 nút
+
+3.Nút K tính từ cuối ta dùng nhanh-chậm: nhanh 1, chậm 1
+
+-Nhanh có điểm xuất phát trước
+
+-Đến khi nhanh tới null thì chậm là nút K tính từ cuối
+
+4.Xóa phần tử trùng trong Linked List ta dùng runner và current
+
+-Current ở giá trị cần so và runner thì chạy kiểm tra từng nút 
+-Nếu không bang thì chạy tiếp trùng thì xoá nút trùng ra khỏi LinkedList
+
+----Nhanh,Chậm giải quyết được:	-Vòng lặp
+				-Nút giữa
+				-Nút k từ cuối
+

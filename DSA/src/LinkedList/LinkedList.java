@@ -172,4 +172,50 @@ public class LinkedList {
         }
     }
 
+    //code mới ngày 7/5
+    public Node findMiddleNode() {
+        Node a = head;
+        Node b = head;
+        while (b != null && b.next != null) {
+            a = a.next;
+            b = b.next.next;
+
+        }
+        return a;
+    }
+
+    public boolean hasLoop() {
+        Node a = head;
+        Node b = head;
+        while (b != null && b.next != null) {
+            a = a.next;
+            b = b.next.next;
+            if (a == b) return true;
+        }
+        return false;
+    }
+
+    //Lưu ý phải chỉnh lại append để phù hợp với hàm này
+    public void removeDuplicates(){
+        Set<Integer> set = new LinkedHashSet<>();
+        Node current = head;
+        while(current != null){
+            set.add(current.value);
+            current = current.next;
+        }
+        makeEmpty();
+        for(Integer value: set){
+            append(value);
+        }
+        length = set.size();
+    }
+
+
+
+
+
+
+
+
+
 }
