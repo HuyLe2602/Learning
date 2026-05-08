@@ -210,6 +210,15 @@ public class LinkedList {
         length = set.size();
     }
 
+    public int binaryToDecimal() {
+        int i = 0;
+        while(head != null) {
+            i = i * 2 + head.value;
+            head = head.next;
+        }
+        return i;
+    }
+
 
 
 
