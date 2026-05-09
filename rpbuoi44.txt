@@ -1,0 +1,46 @@
+------------------------------------------------Cloud Computing-------------------------------------------------------------------
+
+1. Ảo hoá là mô phỏng phần cứng của máy vật lý để chạy nhiều hệ điều hành cùng lúc 
+
+2.Máy ảo khác với máy vật lý ở chỗ:
+
+-Dễ di chuyển và dễ quản lý
+
+-Không phụ thuộc phần cứng
+ 
+-Chạy nhiều hệ điều hành cùng lúc
+
+-Tiết kiệm hơn 
+
+3.Hypervisor có 2 loại:
+
+-Loại 1:chạy trực tiếp trên phần cứng
+
+-Loại 2: chạy trên hệ điều hành
+
+4.Hyper-V dùng Microkernel Hypervisor có 2 thành phần là parent partition(chính) và child partition (ảo)
+
+-Điểm mạnh:	-Chạy nhiều hệ điều hành
+		-Tối ưu CPU,Ram,Disk
+		-Live Migration(di chuyển VM không downtime)
+		-Hỗ trợ Cluster,Failover
+		-Hỗ trợ Docker/Container
+
+5.Hyper-V ảo hóa mạng bằng Virtual Switch và NIC Teaming
+-Ảo hóa lưu trữ bằng VHD/VHDX với Fixed, Dynamic, Differencing để tiết kiệm tài nguyên và dễ quản lý
+
+6.Khi tạo máy ảo, cần cấu hình các thông số cơ bản như tên và vị trí lưu, ram, cpu, mạng, ổ cứng, dynamic memory để tối ưu tài nguyên
+
+7.Check point gip lưu điểm khôi phục của máy ảo để có thể quay lại khi xảy ra lỗi 
+
+-Khi tạo checkpoint cần lưu trạng thái hệ điều hành, lưu ram, lưu cấu hình máy ảo
+
+8.Ảo hoá là nền tảng của điện toán đám mây giúp tiết kiệm chi phí, tối ưu tài nguyên và triển khai máy chủ nhanh chóng
+
+----------------------------------------------------DSA--------------------------------------------------------------------------------
+
+-Partition List là chia list làm 2 dựa trên bé hơn x và lớn hơn x
+
+-Sau đó duyệt từng node rồi cập nhật lại tail rồi nối 2 list lại cuối cùng là trả về list hoàn chỉnh
+
+-Code trong DSA
