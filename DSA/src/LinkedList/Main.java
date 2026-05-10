@@ -40,12 +40,22 @@ public class Main {
 //
 //        mylinkedList.printList();
 
+        mylinkedList.append(1);
+        mylinkedList.append(2);
         mylinkedList.append(3);
-        mylinkedList.append(23);
+        mylinkedList.append(4);
+        mylinkedList.append(5);
+        mylinkedList.append(6);
         mylinkedList.append(7);
+        mylinkedList.append(8);
+        mylinkedList.append(9);
 
-        System.out.println(mylinkedList.remove(2));
+/*        System.out.println(mylinkedList.remove(2));
 
+        mylinkedList.printList();*/
+
+        mylinkedList.reverseBetween(7,2);
+        System.out.println("Reverse between 2 and 7: ");
         mylinkedList.printList();
     }
 }

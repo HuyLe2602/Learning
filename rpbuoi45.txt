@@ -1,0 +1,84 @@
+
+------------------------------------------------Cloud Computing-------------------------------------------------------------
+
+1.VPS là 1 máy chủ vật lý mạnh dùng công nghệ ảo hoá chia thành nhiều máy ảo riêng biệt
+
+2.Dedicated Server cứ mỗi máy vật lý tương đương 1 khách hàng hiệu năng cao, quyền kiểm soát hoàn toàn, chi phí cao
+
+3.Shared Hosting nhiều khách dùng chung 1 máy chi phí rẻ dễ bị ảnh hưởng lẫn nhau 
+
+4.VPS nằm giữa 2 loại trên chi phí hợp lý, hiệu năng tốt, có quyền quản trị riêng
+
+5.VPS hoạt động nhờ Hypervisor có vai trò quản lý phần cứng vật lý và chia tài nguyên cho các máy ảo
+
+5.VPS đối với khách hàng chi phí thấp, ổn định, linh hoạt, bảo mật tốt
+
+6.VPS có 2 dạng là:	-Linux dùng SSH quản lý bằng dòng lệnh Port mặc định là 22
+
+			-Window dùng RDP điều khiển bằng giao diện đồ họa Port mặc định là 3389
+
+			-Control Paner quản lý bằng web
+
+7.Cung cấp dịch vụ VPS có 4 quy trình:	-Giai đoạn 1 là tiếp nhận đơn hàng
+
+					-Giai đoạn 2 là Provisioning(tạo máy)
+					
+					-Giai đoạn 3 là bàn giao
+
+					-Giai đoạn 4 là Vận hành(hỗ trợ)
+
+8.Các phần mềm hỗ trợ VPS là:	-Quản lý khách hàng + thanh toán
+	
+				-Nền tảng ảo hoá
+
+				-Quản lý cấu hình dùng để tự động cấu hình server
+
+				-Monitoring dùng để theo dõi cpu, ram, disk, network
+
+9.VPS thường dùng:	-Private IP là IP nội bộ
+			
+			-Public IP là IP truy cập từ Internet
+
+			-PAT dùng để tiết kiệm IP
+
+			-NAT mỗi VPS là 1 IP riêng
+
+10.Ưu điểm của VPS là:	-Tài nguyên riêng
+
+			-Hiệu năng ổn định
+
+			-Dễ nâng cấp
+
+			-Toàn quyền quản trị
+
+			-Linh hoạt cao
+
+			-Rẻ hơn Dedicated Server
+
+11. Nhược điểm của VPS là:	-Cần biết quản trị Linux/Windows
+
+				-Tự cấu hình bảo mật
+
+				-Bị giới hạn bởi máy vật lý
+
+				-Nếu máy vật lý hỏng thì VPS ngừng
+
+
+--------------------------------------------------------DSA-----------------------------------------------------------
+
+Reverse Betwwen là đổi chỗ cho 1 đoạn ở giữa linked list từ trái qua phải
+
+-Ví dụ: Ta có: 1-2-3-4-5-6-7-8-9 chọn đoạn reverse là 2 đến 7 thì
+
+1 và 8-9 giữ nguyên và 2 đến 7 sẽ đổi chiều lại thành 7-6-5-4-3-2 sau đó nối lại các nốt giữ nguyên lại thì ta có:
+
+1-7-6-5-4-3-2-8-9
+
+-Code trong file DSA
+
+
+
+
+
+
+
