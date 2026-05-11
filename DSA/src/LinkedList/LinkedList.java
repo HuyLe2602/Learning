@@ -266,4 +266,30 @@ public class LinkedList {
         head = dummyNode.next;
     }
 
+    //code mới ngày 11/5
+    public void swapPairs() {
+
+        Node prev = new Node(-1); // dummy node
+        prev.next = head;
+
+        Node current = null; // node đầu
+        Node nextNode = null; // node sau
+
+        Node newNode = prev; // lưu dummy để update head
+
+        while (prev != null && prev.next != null && prev.next.next != null) {
+
+            current = prev.next; // node thứ 1
+            nextNode = prev.next.next; // node thứ 2
+
+            current.next = nextNode.next; // 1 trỏ sang node kế tiếp
+            nextNode.next = current; // 2 trỏ về 1
+            prev.next = nextNode; // prev trỏ sang 2
+
+            prev = nextNode.next; // move prev tới cuối cặp
+        }
+
+        head = newNode.next; // cập nhật head mới
+    }
+
 }

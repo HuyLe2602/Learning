@@ -1,0 +1,72 @@
+----------------------------------------------------Cloud Computing---------------------------------------------------------
+
+1.Cloud Storage là dịch vụ cho phép lưu trữ dữ liệu trên internet thay vì chỉ lưu trong máy tính cá nhân.
+-Người dùng có thể:	-Lưu file
+
+			-Sao lưu dữ liệu
+
+			-Chia sẻ file
+
+			-Đồng bộ dữ liệu giữa nhiều thiết bị
+
+2.Vai trò của Cloud Storage là nhà cung cấp dịch vụ có nhiệm vụ và người dùng có nhiệm vụ
+
+3.Cloud Strorage có:	-Personal Cloud Storage dành cho cá nhân
+
+			-Public Cloud Storage dành cho cộng đồng, doanh nghiệp
+
+			-Private Cloud Storage dành riêng cho doanh nghiệp
+
+			-Hybrid Cloud Storage là kết hợp Public + Private
+
+4.Công nghệ bảo mật của Cloud Storage có 3 khái niệm:
+
+-Encryption là biến dữ liệu thành dạng mã hóa để bảo vệ.
+
+-Authentication là xác thực kiểm tra bạn là ai
+
+-Authorization phân quyền là quy định bạn làm được gì
+
+5.Các loại dịch vụ của Cloud Storage là:-Google Drive của google
+
+					-AWS Cloud Storage của amazon
+		
+					-File Storage lưu trữ file thông thường
+
+					-Block Storage lưu trữ cho database và ứng dụng
+
+					-Object Storage lưu trữ dữ liệu phi cấu trúc(ảnh, video)
+
+					-OneDrive của Micro Soft
+
+					-DropBox dịch vụ lưu trữ đám mây phổ biến
+
+6.Trong doanh nghiệp nhu cầu lưu trữ cần tính đa dạng(nhiều kiểu dữ liệu, dung lượng), tính linh động và an toàn
+
+7.Distributed File System là hệ thống tập tin phân tán
+
+-Mục đích là thay vì người dùng phải nhớ nhiều server khác nhau, chỉ cần truy cập 1 DFS Server, DFS sẽ dẫn tới dữ liệu
+
+-Lợi ích là dễ quản lý, truy cập, tăng tốc độ và tăng độ an toàn
+
+8.Work Folders là dịch vụ trên Windows Server giúp nhân viên truy cập file công ty từ nhiều loại thiết bị từ bất cứ đâu
+
+9.Work Folder có thể:	-Truy cập từ nội bộ hoặc internet ở nhà vẫn có thể mở file ở công ty
+
+			-Không cần join domain laptop cá nhân vẫn dùng được
+
+			-Trên Windows nhìn như thư mục local
+
+			-Thiết bị khác dùng app còn trên pc/laptop thì không cần
+
+			-Hỗ trợ offline + tự sync không có mạng vẫn mở file khi có mạng lại là tự đồng bộ
+
+			-Có mã hóa dữ liệu để đảm bảo an toàn cho file
+
+--------------------------------------------------DSA-------------------------------------------------------------------------------
+
+Swap Pairs là đổi vị trí 2 node từ head liền kề với nhau đến hết nếu là node lẻ thì giữ nguyên
+
+Tạo 2 node trung gian là dummy và node kế tiếp để giữ node 1 và chạy để node 1 và node 2 thay thế chỗ tương tự như cách đổi vị trí 2 node 
+
+Nhưng thực hiện trong vòng lặp đến khi không thoả điều kiện thì out sau đó cập nhật lại
