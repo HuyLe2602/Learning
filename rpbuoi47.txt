@@ -1,0 +1,64 @@
+--------------------------------------------Cloud Computing-----------------------------------------------------
+
+1.Thiết bị lưu trữ dùng để lưu dữ liệu, chương trình và hệ điều hành.
+
+-Các loại phổ biến:	-HDD: dung lượng lớn nhưng giá rẻ
+
+			-SSD: tốc độ cao, độ bền tốt
+
+			-CD/DVD: lưu trữ quang học
+
+-Chuẩn kết nối:	-SATA: tốc độ cao, phổ biến
+
+		-SCSI/SAS: dùng cho máy chủ, độ ổn định cao
+
+2.RAID là công nghệ kết hợp nhiều ổ đĩa vật lý thành một ổ logic nhằm tăng hiệu suất và bảo vệ dữ liệu
+
+3.Hệ thống cloud cần:	-Dung lượng lớn
+
+			-Dễ mở rộng
+
+			-Truy xuất liên tục
+
+			-An toàn dữ liệu
+
+			-Chi phí linh hoạt
+
+4.Storage Spaces là công nghệ của Microsoft cho phép:	-Gom nhiều ổ đĩa vật lý thành Storage Pool
+
+							-Tạo các Virtual Disk (ổ đĩa ảo)
+
+-Các loại Virtual Disk:	-Fixed Disk: cấp phát cố định
+
+			-Thin Disk: dùng bao nhiêu cấp bấy nhiêu
+
+-Layout lưu trữ: Simple,Mirror,Parity
+
+5.NAS là thiết bị lưu trữ qua mạng, chia sẻ dữ liệu dưới dạng file
+
+6.SAN là hệ thống lưu trữ qua mạng, cung cấp dữ liệu dưới dạng block cho server
+
+7.Windows Server hỗ trợ Virtual SAN (vSAN) thông qua giao thức iSCSI gồm:	-iSCSI Target: nơi cung cấp ổ đĩa
+
+										-iSCSI Initiator: máy kết nối tới ổ đĩa
+
+8.Khi dung lượng lưu trữ không đủ, có thể bổ sung thêm ổ cứng vật lý vào Storage Pool mà không ảnh hưởng đến dữ liệu đang sử dụng
+
+9.Hệ thống cho phép tháo hoặc thay thế ổ đĩa khi máy đang hoạt động
+
+-Nếu dùng Simple Disk thì dữ liệu có thể bị mất
+
+-Nếu dùng Mirror hoặc Parity thì dữ liệu vẫn an toàn
+
+10.Khi ổ đĩa bị lỗi hoặc được thay thế, hệ thống có thể tự động phục hồi và đồng bộ lại dữ liệu
+
+11.Các giao thức trong SAN:	-Fibre Channel là giao thức truyền dữ liệu tốc độ cao bằng cáp quang
+
+				-iSCSI là giao thức truyền dữ liệu qua mạng TCP/IP
+
+---------------------------------------------------------------DSA---------------------------------------------------------------------
+
+
+Danh sách liên kết kép giống với danh sách liên kết đơn khác ở chỗ kép có thể chỉ ngược lại
+
+Thực hiện tạo Constructor cho danh sách liên kết kép
