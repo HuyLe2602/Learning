@@ -58,10 +58,13 @@ public class Main {
         System.out.println("Reverse between 2 and 7: ");
         mylinkedList.printList();*/
 
-        DoublyLinkedList myDLL = new DoublyLinkedList(7);
-        myDLL.getHead();
+        DoublyLinkedList myDLL = new DoublyLinkedList(1);
+/*        myDLL.getHead();
         myDLL.getTail();
         myDLL.getLength();
+        myDLL.printList();*/
+
+        myDLL.append(2);
         myDLL.printList();
     }
 }
