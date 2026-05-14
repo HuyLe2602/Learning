@@ -58,4 +58,25 @@ public class DoublyLinkedList {
             }
             length++;
         }
+
+        //Code mới ngày 14/5
+        public Node removeLast() {
+            if (length == 0) return null;
+            Node temp = tail;
+            if (length == 1) {
+                head = null;
+                tail = null;
+            }else
+            {
+                tail = tail.prev; //tail sẽ là node trước đó
+                tail.next = null; //tail.next sẽ là null
+                temp.prev = null; //temp.prev sẽ là null
+
+            }
+            length--;
+            return temp;
+        }
+
+
+
 }
