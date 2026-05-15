@@ -1,0 +1,23 @@
+Trong phương thức them vào đầu thì ta cho 1 node trỏ tới node mới và node mới cũng trỏ tới node head cuối cùng là node mới trỏ về trước là null
+
+Trong trường hợp danh sách chỉ có 1 node thì nó vừa là head vừa là tail node tới và trước đều chỉ về null
+
+Phương thức xoá node đầu tiên nó tương tự phương thức xoá ở tail nhưng là head
+
+Phương thức get ở danh sách kép khác với đơn ở chỗ chúng ta lấy nút ở 1 vị trí cụ thể
+
+Trong get danh sách kép thì để tối ưu nếu node nằm nửa đầu thì dung 1 vòng lặp tăng dần còn nửa sau thì dùng vòng lặp giảm dần
+
+Phương thức set có kiểu trả về là Boolean muốn set giá trị thì chỉ vào node chỉ định nếu nằm trong danh sách sẽ trả về true không thì trả về false
+
+Phương thức set trong đôi tương đối giống đơn nhưng tối ưu hơn nó set ở vị trí gần đầu head hơn hay tail hơn
+
+Phương thức insert nếu chèn ở đầu ta gọi phương thức prepend còn cuối thì append
+
+Nếu chèn vào giữa danh sách ta cần cho node trước node mới trỏ tới node sau trỏ về node mới sẽ trỏ về node trước và trỏ tới node sau
+
+Phương thức remove là xoá node trong danh sách kép nếu đầu danh sách thì removefirst nếu cuối thì removelast
+
+Nếu xoá ở giữa thì node cho temp là node muốn xoá node trước trỏ qua node sau bỏ qua temp node sau trỏ về bỏ qua tem
+
+Node muốn xoá cắt đứt bằng cách 2 đầu trỏ trả về null
