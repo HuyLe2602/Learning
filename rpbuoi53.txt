@@ -1,0 +1,96 @@
+---------------------------------------------Đề 1--------------------------------------------------------------
+Câu 1: Khái niệm và đặc điểm của Cloud Computing
+
+-Cloud Computing là mô hình cung cấp tài nguyên CNTT như server, lưu trữ, mạng và phần mềm qua Internet
+
+-Đặc điểm của Cloud Computing:
+				-Tự cấp phát tài nguyên theo nhu cầu
+
+				-Truy cập qua Internet ở nhiều thiết bị
+
+				-Chia sẻ tài nguyên cho nhiều người dung
+
+				-Dễ dàng mở rộng hoặc thu hẹp hệ thống
+
+				-Trả phí theo mức sử dụng
+
+2.So sánh IaaS, PaaS, SaaS
+
+-IaaS là mô hình cung cấp hạ tầng như server, mạng và lưu trữ. Nhà cung cấp quản lý phần cứng, khách hàng quản lý hệ điều hành và ứng dụng
+
+-PaaS là mô hình cung cấp nền tảng phát triển ứng dụng. Nhà cung cấp quản lý hạ tầng và hệ điều hành, khách hàng chỉ quản lý ứng dụng và dữ liệu
+
+-SaaS là mô hình cung cấp phần mềm hoàn chỉnh qua Internet. Nhà cung cấp quản lý toàn bộ hệ thống, khách hàng chỉ cần sử dụng phần mềm
+
+3.Triển khai NLB Cluster và DFS Replication
+
+-Đầu tiên cài IIS trên hai Web Server là WEB1 và WEB2. Sau đó cài Network Load Balancing để tạo Cluster và thêm hai Server vào hệ thống cân bằng tải
+
+-Tiếp theo cài DFS Replication để đồng bộ thư mục Website giữa hai Server. Khi chỉnh sửa dữ liệu ở một Server thì Server còn lại sẽ tự động cập nhật
+
+-Kết quả là hai Web Server hoạt động cùng lúc và dữ liệu Website luôn được đồng bộ
+
+4.Kiểm tra cân bằng tải và tính sẵn sàng
+
+-Để kiểm tra cân bằng tải, truy cập vào địa chỉ Cluster IP. Hệ thống sẽ tự động chia request giữa WEB1 và WEB2
+
+-Để kiểm tra tính sẵn sàng, tắt một Server hoặc ngắt kết nối mạng của Server đó. Website vẫn hoạt động bình thường nhờ Server còn lại
+
+-Điều này cho thấy hệ thống có khả năng cân bằng tải và đảm bảo tính sẵn sàng cao
+
+------------------------------------------------Đề 2-----------------------------------------------------------------------------------------------------
+
+1.Giải thích sự khác biệt giữa NAS và SAN
+
+-NAS và SAN đều là hệ thống lưu trữ mạng nhưng có cách hoạt động khác nhau
+
+-NAS (Network Attached Storage) là thiết bị lưu trữ kết nối trực tiếp vào mạng LAN và chia sẻ dữ liệu dưới dạng file. NAS dễ triển khai, chi phí thấp và phù hợp cho chia sẻ dữ liệu thông thường
+
+-SAN (Storage Area Network) là mạng lưu trữ chuyên dụng kết nối Server với thiết bị lưu trữ tốc độ cao. SAN cung cấp hiệu năng cao, độ ổn định tốt và thường dùng trong doanh nghiệp lớn hoặc hệ thống Datacenter
+
+-Điểm khác nhau:
+
+		-NAS truy cập dữ liệu theo file, SAN truy cập theo block
+
+		-NAS dùng mạng LAN, SAN dùng mạng riêng tốc độ cao
+
+		-NAS dễ quản lý hơn SAN
+
+		-SAN có hiệu năng cao hơn NAS
+
+2.Trình bày vai trò của DFS Namespace và DFS Replication trong doanh nghiệp
+
+-DFS Namespace giúp gom nhiều thư mục chia sẻ từ nhiều Server thành một đường dẫn chung giúp người dùng truy cập dễ dàng
+
+-DFS Replication giúp đồng bộ dữ liệu giữa các Server tự động nhằm đảm bảo dữ liệu luôn giống nhau và tăng tính sẵn sàng của hệ thống
+
+-Vai trò trong doanh nghiệp:
+				-Quản lý dữ liệu tập trung
+				
+				-Đồng bộ dữ liệu giữa các chi nhánh
+
+				-Tăng khả năng dự phòng và chia sẻ dữ liệu
+
+
+3.Triển khai Windows Failover Cluster với 2 Node, cấu hình Quorum Witness và Cluster Shared Volume
+
+-Đầu tiên cài Windows Failover Clustering trên hai Node Server. Sau đó mở Failover Cluster Manager để tạo Cluster mới và thêm hai Node vào Cluster
+
+-Tiếp theo cấu hình Quorum Witness để duy trì hoạt động của Cluster khi một Node gặp sự cố
+
+-Sau đó cấu hình Cluster Shared Volume (CSV) để hai Node cùng truy cập dữ liệu lưu trữ chung
+
+-Kết quả:
+
+	-Hai Node hoạt động trong cùng một Cluster
+
+	-Dữ liệu được chia sẻ và quản lý tập trung
+
+4.Kiểm tra khả năng failover khi một Node gặp sự cố bằng cách truy cập dữ liệu từ Client
+
+-Để kiểm tra Failover, tắt một Node trong Cluster hoặc ngắt kết nối mạng của Node đó
+
+-Từ máy Client truy cập dữ liệu trong Cluster Shared Volume. Hệ thống sẽ tự động chuyển dịch vụ sang Node còn lại mà không làm gián đoạn truy cập dữ liệu
+
+-Điều này chứng minh hệ thống có khả năng Failover và đảm bảo tính sẵn sàng cao
+				-
