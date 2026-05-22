@@ -1,0 +1,7 @@
+1.Muốn đảo 1 chuỗi kí tự ta cho chuỗi vào stack rồi lấy ra theo nguyên tắc LIFO(last in first out) 
+
+2.Parentheses Balanced trong stack là trạng thái các dấu ngoặc trong biểu thức được ghép cặp đầy đủ và đóng đúng thứ tự mở
+
+3.Sort Stack là quá trình sắp xếp các phần tử bên trong Stack theo thứ tự tăng dần hoặc giảm dần
+
+4.Queue Using Stacks là kỹ thuật triển khai cấu trúc dữ liệu Queue bằng cách sử dụng hai Stack để mô phỏng cơ chế FIFO của Queue thông qua thao tác đảo ngược phần tử

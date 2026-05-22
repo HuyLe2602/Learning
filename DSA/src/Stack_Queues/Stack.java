@@ -6,7 +6,7 @@ public class Stack {
 
     Stack(int value) {
         Node newNode = new Node(value);
-        top = new Node(value);
+        top = newNode;
         length = 1;
     }
 
@@ -19,31 +19,39 @@ public class Stack {
     }
 
     public void getTop() {
-            System.out.println("Top: " + top.value);
+        System.out.println("Top: " + top.value);
     }
-    public  void getLenght() {
-        System.out.println("Heigth: " + length);
+
+
+    public int getLength() {
+        return length;
     }
-    public void push(int value){
+
+    public void push(int value) {
         Node newNode = new Node(value);
+
         if (length == 0) {
             top = newNode;
         } else {
             newNode.next = top;
             top = newNode;
         }
+
         length++;
     }
 
-    public void pop() {
+
+    public int pop() {
         if (length == 0) {
             System.out.println("Stack is empty");
-            return;
+            return -1;
         }
+
         Node temp = top;
         top = top.next;
         temp.next = null;
         length--;
-    }
 
+        return temp.value;
+    }
 }
