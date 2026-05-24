@@ -1,0 +1,7 @@
+1.Phương thức contains là phương thức dạng Boolean để tìm nút có giá trị tương ứng trong cây tìm kiếm 
+
+2.HashTable là cấu trúc dữ liệu dùng để lưu trữ dữ liệu theo cặp giá tị khoá, giúp tìm kiếm, thêm và xoá dữ liệu rất nhanh bằng cách dùng hàm băm (hash function) để chuyển key thành vị trí lưu trong bộ nhớ
+
+3.Separate Channing là đặt 1 cặp giá trị khoá ở cùng 1 địa chỉ ngay cả khi có 1 cặp nhằm xử lý xung đột
+
+4.Linear Probing là thăm dò tuyết tính tóm gọn là tìm ô trống cho đến khi có để chứa 1 cặp giá trị khó
