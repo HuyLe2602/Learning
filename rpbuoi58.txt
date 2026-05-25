@@ -1,0 +1,6 @@
+1.Cách tìm ra bản sao ta cho 1 bên là giá trị 1 bên là đếm số lần giá trị xuất hiện nếu >1 tức giá trị đó có bản sao
+
+2.Đẻ xác định ký tự không lặp lại đầu tiên trong chuỗi ta thực hiện kiểm tra bản sao nếu có ký tự xuất hiện 1 lần thì xuất ra còn không thì trả về null
+
+3.Đảo ngược chữ trong hashmap thì ta dùng xác định ký tự không lặp lại để so từ giá trị trong cặp khoá gì trị và them vào mảng được liên kết với khoá đó
+
