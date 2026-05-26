@@ -1,0 +1,9 @@
+1.Two Sum là tìm hai phần tử trong mảng có tổng bằng một giá trị cho trước
+
+2.Subarray Sum là tính tổng của một đoạn phần tử liên tiếp trong mảng
+
+3.Remove Duplicates là loại bỏ các giá trị lặp trong mảng hoặc chuỗi để giữ lại các giá trị duy nhất
+
+4.Set: Has Unique Chars kiểm tra một chuỗi có chứa các ký tự không trùng lặp hay không
+
+5.Làm bài tập các bài trên
