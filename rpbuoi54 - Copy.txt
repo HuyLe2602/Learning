@@ -1,0 +1,7 @@
+1.Queue là 1 cấu trúc dữ liệu hoạt động theo nguyên tắc FIFO nào vào trước ra trước
+
+-Khác với Stack là LIFO vào sau ra trước thì queues vào trước ra trước như xếp hàng thì stack going kiểu xếp đồ
+
+2.Enque là thêm phần tử ở cuối hàng chờ
+
+3.Dequeue là xoá phần tử ở đầu hàng chờ

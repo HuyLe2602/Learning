@@ -1,0 +1,65 @@
+------------------------------------------------------------Cloud Computing--------------------------------------------------
+
+1.Mô hình PaaS phải đáp ứng 3 yêu cầu chính:
+
+-Tính sẵn sàng cao
+
+-Cân bằng tải
+
+-Đồng bộ dữ lieu
+
+2.NLB là công nghệ cho phép nhiều server dùng chung một IP ảo (Cluster IP) để phục vụ client
+
+-Client chỉ truy cập một IP nhưng request được phân phối đến nhiều server
+
+3.Mô hình bao gồm:
+
+-Active Directory Domain Services DC (Domain Controller)
+
+-Management Network dùng để quản trị
+
+-Client Network dùng để cung cấp dịch vụ cho người dùng
+
+4.Cấu hình NLB
+
+-Card Management dùng Static IP
+
+-Card Client có thể Dynamic hoặc Static
+
+-NLB cần IP cố định để cluster hoạt động ổn định
+
+5.Cluster IP là địa chỉ IP đại diện cho toàn bộ cụm server
+
+-Client sẽ truy cập vào Cluster IP thay vì IP từng server
+
+-Cluster IP phải cùng lớp mạng với các server
+
+6.Unicast là các server dùng chung MAC mới
+
+7.Multicast là Cluster thêm MAC vào card mạng hoạt động tốt trong môi trường VMware
+
+8.IGMP Multicast tương tự multicast nhưng tối ưu broadcast cần switch hỗ trợ IGMP
+
+9.Distributed File System là dịch vụ đồng bộ thư mục giữa nhiều server
+
+10.Namespace là thư mục logic dùng truy cập tập trung
+
+11.Network Load Balancing có chức năng cân bằng tải
+
+12.Internet Information Services có chức năng Host Website
+
+13.Distributed File System có chức năng đồng bộ hoá dữ lieu 
+
+14.Active Directory Domain Services có chức năng quản lý domain
+
+15.Cluster IP có chức năng là IP đại diện cho cụm server 
+
+16.Full Mesh có chức năng mọi server đồng bộ với nhau
+
+17.NLB + IIS + DFS = Web PaaS có HA + Load Balancing + Data Sync
+
+-----------------------------------------------------------DSA---------------------------------------------------------------
+
+Xoá node cuối trong danh sách liên kết kép khác với đơn là có hưởng trỏ về trong khi đơn chỉ có trỏ tới
+
+Muốn xoá ta cần cho temp chỉ vào trỏ cuối nút trỏ về cho về null nút trỏ tới node đó là null lúc này 2 trỏ của node đều là null

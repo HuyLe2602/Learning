@@ -1,0 +1,63 @@
+-------------------------------------------------------------Cloud Computing-----------------------------------------------
+
+1.Failover Cluster là kỹ thuật đảm bảo hệ thống vẫn hoạt động khi có máy chủ gặp sự cố bằng cách sử dụng nhiều server cùng phối hợp
+
+-Khi một server bị lỗi, server khác sẽ tự động tiếp quản dịch vụ
+
+-Mục đích là tăng tính sẵn sàng, giảm thời gian gián đoạn dịch vụ, đảm bảo hệ thống hoạt động liên tục
+
+-Nguyen lý là gồm nhiều server gọi là node, 1 node đang xử lý dịch vụ các node còn lại chờ dự phòng nếu lỗi dự phòng sẽ thay thế
+
+-Heartbeat là các gói tin dùng để kiểm tra trạng thái hoạt động giữa các node
+
+2.Service Role là dịch vụ chạy trên cluster
+
+-Đặc điểm mỗi node phải được cài trên tất cả node, tại 1 thời điểm chỉ 1 node xử lý role
+
+3.Resource là tài nguyên role sử dụng
+
+-Node đang chạy role sẽ sở hữu toàn bộ resource của role đó
+
+4.Quorum là cơ chế bỏ phiếu để xác định node nào được tiếp tục hoạt động khi xảy ra sự cố mạng
+
+-Mỗi node có 1 vote với tổng số vote > 50% là hoạt động <50% là offline
+
+5.Cluster có số node chẵn Sẽ có nguy cơ chia đều phiếu
+
+-Cách giải quyết là Zero vote(huỷ quyền bỏ phiếu của 1 node) hoặc Witness(them 1 phiếu từ tài nguyên dung chung)
+
+6.Windows Failover Cluster là hệ thống cluster trên Windows Server có số node tối đa là 64
+
+7.Các loại Witness:	-Disk Witness là sử dụng ổ đĩa SAN hoặc NAS
+
+			-File Share Witness là sử dụng thư mục chia sẻ trong domain
+
+			-Cloud Witness là sử dụng lưu trữ đám mây của Microsoft trên Microsoft Azure
+
+7.Điều kiện triển khai Windows Cluster
+
+-Tham gia domain
+
+-Cài cùng server role
+
+-Có shared Storage
+
+-Mạng đồng nhất
+
+8.Cluster Shared Volume (CSV) là cho phép nhiều node truy cập cùng một ổ đĩa đồng thời
+
+9.Cluster Role là dịch vụ hoặc ứng dụng chạy trên cluster
+
+-Mỗi role có ip, dns, tài nguyên riêng khi role lỗi sẽ chuyển sang node khác
+
+10.File Server Cluster Role là cung cấp chia sẻ file qua giao thức SMB
+
+11.
+
+--------------------------------------------------------------------DSA-------------------------------------------------------------------
+
+Phương thức append là phương thức them node mới vào danh sách liên kết kép
+
+ta sẽ thêm node đó vào cuối tail sẽ trỏ vào node mới và node mới cũng trỏ về tail 
+
+lúc đó tail sẽ không còn là node cũ mà chuyển vai trò tail sang node mới

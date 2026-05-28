@@ -1,0 +1,69 @@
+-----------------------------------Cloud Computing----------------------------------------
+
+
+1. Cloud Computing là dạng cho thuê tài nguyên qua internet dạng dịch vụ như:
+
+-máy chủ
+-cpu
+-ram
+-lưu trữ
+-phần mềm
+
+2.On-demand self-service là tự phục vụ theo yêu cầu
+-Người dung có thể tự yêu cầu tài nguyên:CPU,RAM,DATABASE,NETWORK,STORAGE
+-Không cần nhân viên IT chuyên nghiệp can thiệp thủ công
+-Cloud tự cấp phát
+
+Ví dụ: Mô hình cho thuê máy theo giờ tại nhà
+
+3.Broad Network Access là khả năng truy cập mạng rộng
+
+-Cloud được truy cập qua Internet
+
+Ví dụ: có thể truy cập gmail,fb,ytb bằng đt, máy tính,...
+
+4.Resource Pooling là dung chung tài nguyên:
+
+-Nhà cung cấp gom nhiều tài nguyên vật lý:CPU, Ram, Network, Disk thành 1 "pool" lớn sau đó chia cho nhiều khách
+
+5.Rapid Elasticity là khả năng co giãn:
+
+-Cloud có thể tự do tăng giảm tài nguyên 
+
+6.Measured Service là đo lường
+
+-Cloud theo dõi mưc độ sử dụng: CPU, Ram, bandwidth, storage, request
+
+-Dùng bao nhiêu trả bấy nhiêu
+
+7.Front end là cửa vào cloud còn back end là phần phía server
+
+-Trình tự xử lí là người dùng-front end-internet-backend-dữ liệu và xử lý 
+
+8.Public cloud là Cloud do bên thứ 3 sở hữu ví dụ GGcloud
+
+9.Private cloud là Cloud dành riêng cho tổ chức kiểu nội bộ
+
+10.Hybrid là sự kết hợp của public và private
+
+11.Có 3 mô hình trong dịch vụ cloud:
+-IaaS là kiểu cho thuê máy 
+-PaaS là kiểu cho thuê môi trường code
+-SaaS là kiểu cho thuê phần mềm
+
+12.Virtualization là 1 máy vật lí tạo ra nhiều máy ảo trong đó có nhiều loại ảo hoá
+-Ảo hoá máy chủ
+-Ảo hoá lưu trữ
+-Ảo hoá mạng
+
+13.Các công nghệ lưu trữ:HDD, SSD, RAID, NAS, SAN
+
+14.Distributed là nhiều server cùng xử lý 
+
+15.Automation tự động hoá ví dụ CPU>80% là tự thêm server
+
+---------------------------------------------------------------------------------------------------------
+					DAS
+
+-Khi gặp bài toán nhị phân sang thập phân:
+-Đọc từng bit từ trái sang phải kết quả cũ nhân 2, cộng bit mới.

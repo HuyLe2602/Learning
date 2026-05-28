@@ -1,0 +1,15 @@
+1.Phương thức tìm cặp trước tiên sẽ truyền vào 2 mảng và 1 biến để tìm các cặp phần tử trong mảng thỏa mãn một điều kiện nhất định của biến
+
+2.Longest Consecutive Sequence là tìm dãy số liên tiếp dài nhất trong mảng mà không cần các phần tử nằm cạnh nhau trong vị trí mảng
+
+3.Đồ thị dùng để biểu diễn mối quan hệ giữa các đối tượng bằng đỉnh và cạnh khác với cây chỉ có thể trỏ tới 2 nút
+
+-Danh sach liên kết là 1 dạng cây và cây là 1 dạng của đồ thị
+
+4.Ma trận kề có hang và cột đại diện cho các đỉnh của đồ thị dung để biểu diễn mối liên kết của các đỉnh
+
+5.Danh sách kề dung để biểu diễn ma trận bằng danh sách liên kết hoặc danh sách mảng trong đó mỗi đỉnh sẽ lưu danh sách kề với nó 
+
+6.-Ma trận kề phù hợp khi đồ thị có nhiều cạnh và cần kiểm tra cạnh nhanh
+
+-Danh sách kề phù hợp khi đồ thị ít cạch và muốn tiết kiệm bộ nhớ

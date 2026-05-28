@@ -1,0 +1,67 @@
+1. Mở đầu:
+
+-Chào thầy cô
+
+-Giới thiệu bản than
+
+-Phần phụ trách
+
+-Em xin trình bày phần em đảm nhận gồm: UI/UX, trang chủ website và hệ thống Admin
+
+2.UI/XX
+
+-Đơn giản-hiện đại-dễ dung
+
+-Công nghệ: HTML, CSS, Bootstrap, JS, jQuery
+
+-bootstrap giúp web site có thể responsive trên các thiết bị như tablet, máy tính, điện thoại
+
+-Tối ưu trải nghiệm màu sắc, font chữ, khoảng cách, button
+
+Về UI/UX, em tập trung vào tính dễ sử dụng, bố cục rõ ràng và khả năng responsive, thay vì đi quá sâu vào hiệu ứng hoặc thiết kế phức tạp. Trong các phiên bản tiếp theo, em sẽ tiếp tục tối ưu trải nghiệm người dùng và tính thẩm mỹ của giao diện.
+
+3.Trang chủ
+
+-Có banner khuyến mãi , sản phẩm mới
+
+-Product nổi bật sẽ có ảnh, tên, giá và chi tiết sản phẩm
+
+-Menu sẽ có Home, Product, News, Cart, Login
+
+-Sẽ lấy Database qua Entity Framework
+
+
+4.Admin
+
+	*Quản lý toàn bộ hệ thống :
+
+
+-Các chức năng quản lý sản phẩm
+
+-Các chức năng quản lý bài viết
+
+-Quản lý đơn hàng xem đơn, thanh toán, trạng thái giao hàng
+
+5.Công nghệ Backend
+
+-Hệ thống được xây dựng bằng ASP.NET MVC, dữ liệu lưu trên SQL Server, thao tác bằng Entity Framework.
+
+6.kết quả đạt được:
+
+Sau khi hoàn thành phần việc của mình, em đạt được một số kết quả:
+
+xây dựng được giao diện thân thiện với người dùng
+tối ưu hiển thị trên nhiều thiết bị
+xây dựng thành công hệ thống Admin hoạt động ổn định
+hỗ trợ quản lý sản phẩm và nội dung hiệu quả
+
+Thông qua phần việc này, em học được:
+
+tư duy thiết kế giao diện
+cách tối ưu trải nghiệm người dùng
+cách tổ chức code theo mô hình MVC
+cách kết nối và xử lý dữ liệu thực tế trong doanh nghiệp
+
+7.Kết thúc 
+
+Phần trình bày của em đến đây là hết, em xin cảm ơn thầy cô.

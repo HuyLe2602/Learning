@@ -1,0 +1,25 @@
+1.Palindrome là cho forward và backward chạy từ 2 đầu để kiểm tra dù chạy xuôi hay ngược thì vẫn trả về 1 kiểu
+
+2. Reverse trong DoubleLinkedList thì ta dùng current và temp làm trung gian trỏ để đảo chiều và thực hiên tương đối giống danh sách đơn
+
+Cho 2 trung gian chạy đến hết danh sách và xoá sau khi thực hiện xong 
+
+3.Trong hàm Partition tương đối giống danh sách liên kết đơn nhưng có trường hợp đặc biệt ở kép là 
+
+-Khi chia danh sách làm 2 có great(nửa sau tức >x) bị rỗng thì lúc này ở less(<=x) thì tail của less(nửa đầu) sẽ null và không dùng great
+
+-Trường hợp less rỗng thì head của great sẽ là null
+
+4.ReverseBetween của danh sách liên kết kép tương đôi giống đơn cũng rút đoạn chỉ định và đảo ngược sau đó ráp lại và bằng trung gian là dummy
+
+5.swapPair trong danh sách kép tương đối giống đơn nhưng dễ hơn cũng là hoá đổi chỗ của cặp node nhưng kép có sẵn current nên dễ quay lui và sửa
+
+6.Stack hoạt động theo nguyên tắc LIFO vào sau ra trước
+
+-Điểm linh hoạt của stack là có thể thêm vào ở cả 2 đầu nhưng nếu muốn xoá phải xoá đầu được thêm vào mới nhất
+
+-Nó tương đối giống danh sách liên kết đơn nếu danh sách liên kết đơn được biểu diễn là hang ngang thì stack là dọc head=top và tail= bottom nhưng stack thì k cần xác định bottom
+
+7.Push là thêm node lên đầu Stack giống với thêm node mới trong danh sách nhưng chỉ thao tác ở top thôi không linh hoạt như danh sách liên kết đơn
+
+8.Pop là xoá node mới ở bottom trong stack giống xoá node trong dánh sách liên kết đơn nhưng không linh hoạt như danh sách liên kết đơn

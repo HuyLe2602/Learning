@@ -1,0 +1,9 @@
+1.Addvertex là thêm đỉnh vào đồ thị đỉnh này là đỉnh đầu tiên nên chưa có các cạnh liên kết
+
+2.AddEdge là thêm cạnh vào để kết nối 2 đỉnh lại với nhau có thể 2 chiều hoặc 1 chiều
+
+3.removEdge là xoá cạnh mà vẫn giữ đỉnh 
+
+4.removeVertex là xoá đỉnh và các cạnh liên kết của đỉnh đó
+
+5.Các bài tập ở Section 20

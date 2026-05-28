@@ -1,0 +1,27 @@
+1. Cây nhị phân là 1 kiểu dữ liệu khác với danh sách liên kết khi nó sẽ có trái và phải thay vì tiếp theo
+
+-Cây sẽ có duy nhất 1 nút cha và nhiều nút con 
+
+-Nếu nút con ở trạng thái có 0 hoặc 2 nút thì cây đó đầy nếu có 1 nút thì k đầy phải chuyển về dạng đầy
+
+-Cây hoàn hảo là trạng thái các nút đều ở trạng thái đầy nếu nút ở chung thể hệ đề sở hữu kiểu đầy giống nhau(hoặc là 0 có nút con hoặc là cả 2 nút con đều có 2 nút con )
+
+-Cây hoàn tất là trạng thái các nút được hoành thành từ trái qua phải 
+
+-Trong cây các nút không có con gọi là lá
+
+2.Cây tìm kiếm nhị phân là sẽ xét các nút từ trên xuống lớn hơn giá trị nút đầu tiên thì xếp bên phải nhỏ hơn thì xếp bên trái
+
+-Sau đó thực hiện tiếp với các nút dưới cho đến khi nút đầy thì đi xuống nút dưới tiếp
+
+3.Danh sách liên kết đơn chèn nhanh hơn cây, ghi đè và xoá thì cây nhanh hơn danh sách liên kết 
+
+4.Thay vì giống danh sách liên kết thì trông cây tìm kiếm head = root
+
+5.Muốn chèn nút vào cây ta thực hiện các bước:
+
+-Tạo nút
+
+-Xét xem nút đó nằm bên trái giá trị nhỏ hơn nút ở trên hoặc bên phải giá trị lớn hơn nút ở trên
+
+-Sau đó xét xem nút bên trái/phải trống không nếu có thì chèn vào nếu không thì xét nút đã được chèn đó và lặp lại bước so sánh giá trị
