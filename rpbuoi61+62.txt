@@ -1,0 +1,9 @@
+1. Heap là 1 cây hoàn chỉnh với nút đầu tiên mang giá trị lớn nhất hoặc nhỏ nhất, trong heap các nốt có thể thay đổi vị trí với nhau ngoại trừ nốt đầu
+
+2.Insert Heap là them phần tử vào cuối màng rồi thực hiện quá trình bubble up để duy trì tính chat của heap
+
+3.Remove Heap là xoá phần tử gốc của heap rồi đưa phần tử cuối cùng lên gốc và thực hiện SinkDown để khôi phục heap
+
+4.Sink Down là di chuyển 1 nút trên xuống dưới sau khi xoá nút gốc nút sẽ được hoán đổi để duy trình tính chất của heap
+
+5.Các bài tập section 22
