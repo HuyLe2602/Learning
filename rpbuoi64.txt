@@ -1,0 +1,9 @@
+1.Đệ Quy là để một hàm tự gọi lại chính nó cho đến khi gặp điều kiện dừng
+
+-Trong đệ quy phải có base case để tránh trường hợp stack overflow
+
+2.Call stack là cơ chế giúp chương trình theo dõi và quản lý các hàm đang thực thi giống như ngăn xếp trong đó hàm được gọi cuối sẽ  hoàn thành trước
+
+3.Giai thừa là phép toán nhân liên tiếp một số nguyên dương với tất cả các số nguyên dương nhỏ hơn nó cho đến 1
+
+4.Hoàn thành bài tập section 23 
