@@ -1,0 +1,15 @@
+1.rBST Contains là phương thức dùng đệ quy để kiểm tra sự tồn tại của một giá trị trong cây tìm kiếm bằng cách liên tục so sánh giá trị cần tìm với nút hiện tại và di chuyển sang nhánh trái hoặc phải
+
+2.rBST: Insert là phương thức sử dụng đệ quy để tìm đúng vị trí và thêm một nút mới vào cây tìm kiếm nhưng vẫn đảm bảo tính chất sắp xếp của cây tìm kiếm
+
+3.rBST: Delete là phương thức sử dung đệ quy để xoá 1 nút trong cây tìm kiếm sau khi xoá vẫn giữ tính chất của cây tìm kiếm có các trường hợp sau:
+
+-Nút lá: Xoá thẳng nút đó
+
+-Nút có 1 con thì nút con của nút đó thay thế vị trí
+
+-Nút có 2 con thì tìm nút nhỏ nhất ở cây con phải (hoặc lớn nhất ở cây con trái) thay giá trị của nút cần xóa bằng giá trị đó rồi tiếp tục xóa nút thay thế bằng đệ quy
+
+4..Minimum Value là phương thức tìm giá trị nhỏ nhất trong Binary Search Tree bằng cách đi theo nhánh trái liên tục cho đến nút cuối cùng bên trái của cây
+
+5.Hoàn thành bài tập section 26
