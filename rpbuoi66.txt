@@ -1,0 +1,15 @@
+1.Tree Traversal là duyệt qua toàn bộ các nút của cây theo một quy tắc xác định nhằm truy cập hoặc xử lý dữ liệu trong cây,Có 2 quy tắc là BFS và DFS
+
+2.BFS là duyệt cây hoặc đồ thị theo từng cấp độ từ gần đến xa, sử dụng Queue để đảm bảo các nút được xử lý theo thứ tự chiều rộng
+
+3.ĐFS là duyệt cây hoặc đồ thị theo chiều sâu, ưu tiên khám phá hết một nhánh trước khi quay lại để duyệt các nhánh còn lại
+
+-DFS thường được triển khai bằng đệ quy hoặc Stack
+
+4.PreOrder là xử lý nút hiện tại trước rồi đến duyệt các cây con của nó
+
+5.PostOder là xử lý nút con trước rồi mới xử lý nút cha
+
+6.InOder là xử lý nút con trái trước rồi đến nút cha rồi đến nút con phải
+
+7.Bài tập section 27
