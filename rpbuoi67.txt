@@ -1,0 +1,7 @@
+1.BUbble sort là sắp xếp bằng cách liên tục so sánh và hoán đổi các phần tử liền kề khiến phần tử lớn nhất hoặc nhỏ nhất dần di chuyển về đúng vị trí sau mỗi lần duyệt
+
+2.Selection Sort là sắp xếp bằng cách liên tục chọn phần tử nhỏ nhất từ phần chưa sắp xếp và đưa nó về đúng vị trí cho đến khi toàn bộ mảng được sắp xếp
+
+3.Insertion Sort là sắp xếp bằng cách lấy từng phần tử và chèn nó vào đúng vị trí trong phần dữ liệu đã được sắp xếp
+
+4.Hoàn thành các bài tập của section 29,30 
