@@ -1,0 +1,9 @@
+1.Merge là kết hợp hai dãy đã được sắp xếp thành một dãy mới vẫn được sắp xếp bằng cách liên tục chọn phần tử nhỏ nhất từ đầu mỗi day
+
+2.Merge Sort là sắp xếp theo phương pháp chia để trị là liên tục chia nhỏ mảng rồi gộp các phần đã sắp xếp lại với nhau
+
+3.Merge Sort có hiệu suất ổn định phù hợp với dữ liệu lớn nhưng sẽ chiếm thêm bộ nhớ
+
+4.Quick Sort là sắp xếp theo phương pháp chia để trị sử dụng Pivot để phân hoạch mảng thành các phần nhỏ hơn và lớn hơn sau đó sắp xếp đệ quy các phần đó cho đến khi mảng được sắp xếp hoàn toàn
+
+5.Hoàn thành các bài tập ở section 32, 33, 35,36
