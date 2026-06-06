@@ -1,0 +1,7 @@
+1.Quick Sort dung thuật toán chia để trị chọn 1 phần tử làm pivot để chia mảng làm 2 nhỏ hơn thì nằm bên trái lớn hơn thì nằm bên phải
+
+2.Pivot là mốc chia trong Quicksort
+
+3.Quick sort có hiệu xuất trung bình tốt trong thực tế nhưng chọn pivot không phù hợp thì sẽ giảm xuống tệ nhất là O(n^2)
+
+4.Các bài tập section 36, 38
