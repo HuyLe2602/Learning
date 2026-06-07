@@ -1,0 +1,15 @@
+1. Overlapping Subproblems khi các bài toán lặp đi lặp lại nhiều lần chung ta có thể tính 1 bài mẫu và lưu trữ, tái sử dung kết quả để giảm thời gian xử lí
+
+2.Optimal Substructure là kết hợp các lời giải tối ưu của các bài toán con để tạo thành lời giải tối ưu cho bài toán
+
+-Các bài toán con phải chồng chéo nhau
+
+-Các bài toán đó phải được tối ưu
+
+3. Fibonacci Sequence là dãy số mà mỗi phần tử bằng tổng của hai phần tử liền trước nó
+
+4.Memoization là phương pháp lưu trữ kết quả của các lời gọi hàm đệ quy nhằm tránh việc giải lặp lại các bài toán con giống nhau
+
+5.Bottom-Up là tính trước các bài toán con đơn giản rồi sử dụng chúng để giải quyết bài toán lớn hơn mà không cần đệ quy
+
+6.Hoàn thành các bài tập ở section 40 và xong khoá học
