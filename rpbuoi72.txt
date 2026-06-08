@@ -1,0 +1,12 @@
+1. Làm bài tập Valid Anagram dung HashMap kiểu dữ liệu Boolean và có 3 lần dung vòng lặp for
+
+2.Làm bài tập Two Sum dung 2 vòng lặp for long nhau
+
+3.Request - Response là mô hình giao tiếp cơ bản giữa Client và Server
+
+-Client gửi một yêu cầu (Request) đến Server
+
+-Server xử lý yêu cầu và trả về kết quả (Response)
+
+
+-Sau khi nhận được phản hồi, Client phải gửi một request mới nếu muốn tiếp tục lấy dữ liệu
