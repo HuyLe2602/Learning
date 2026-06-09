@@ -1,0 +1,71 @@
+1.Bài Contains Duplicate là dùng HashSet để thêm các số chưa có giá trị trùng lặp nếu có rồi thì trả về true duyệt hết không thấy true trả về false
+
+Code:
+
+class Solution {
+
+    public boolean containsDuplicate(int[] nums) {
+
+        HashSet<Integer> set = new HashSet<>();
+
+        for (int num : nums) {
+
+            if (!set.add(num)) {
+
+                return true;
+            }
+        }
+
+        return false;
+    
+    }
+}
+
+
+2.Bài Intersection of Two Arrays đưa tất cả phần tử của nums1 vào hashset duyệt nums2 để tìm điểm giao nhau điểm giao nhau sẽ cho vào resultset rồi chuyển resultset thành mảng int
+
+Code:
+
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+
+        HashSet<Integer> set1 = new HashSet<>();
+
+        HashSet<Integer> result = new HashSet<>();
+
+        for (int num : nums1) {
+            set1.add(num);
+        }
+
+        for (int num : nums2) {
+
+            if (set1.contains(num)) {
+
+                result.add(num);
+            }
+        }
+
+        int[] ans = new int[result.size()];
+
+        int index = 0;
+
+        for (int num : result) {
+
+            ans[index++] = num;
+        }
+
+        return ans;
+    }
+}
+
+
+3.Synchronous Workload là phải chờ công việc hiện tại hoàn thành xong rồi mới làm việc tiếp theo (going chatbot)
+
+-Gửi yêu cầu -> Đợi xử lý -> Nhận kết quả -> Bước tiếp theo
+
+4.Asynchronous Workload là giao việc xong thì tiếp tục làm việc khác không cần chờ kết quả ngay
+
+-Gửi công việc xử lý -> Hệ thống tiếp tục thực hiện các việc khác -> Kết quả sẽ được xử lý và thông báo sau(giống mở tab trang web)
+
+
+
