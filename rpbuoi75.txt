@@ -1,0 +1,132 @@
+1.Missing Number là tìm số còn thiếu cách làm tìm số theo cặp đến khi triệt tiêu hết thì số còn lại chính là số cần tìm.Các số xuất hiện ở 2 bên nên sẽ triệt tiêu nhau 
+
+Code:
+
+class Solution {
+    public int missingNumber(int[] nums) {
+        int xor = nums.length;
+
+        for (int i = 0; i < nums.length; i++) {
+            xor ^= i;
+            xor ^= nums[i];
+        }
+
+        return xor;
+    }
+}
+
+2.Find the Difference tương tự như số nhưng là ký tự số them mới vào sẽ không có cặp.Vì mọi ký tự có cặp nên sẽ triệt tiêu nhau cái còn lại là số thêm mới
+
+Code:
+
+class Solution {
+    public char findTheDifference(String s, String t) {
+        char result = 0;
+
+        for (char c : s.toCharArray()) {
+            result ^= c;
+        }
+
+        for (char c : t.toCharArray()) {
+            result ^= c;
+        }
+
+        return result;
+    }
+}
+
+3.Roman to Integer là chuyển số la mã thành số nguyên bình thường thì cộng số nhỏ hơn đứng trước thì trừ.Current < next trừ ngược lại thì là cộng
+
+Code:
+
+class Solution {
+    public int romanToInt(String s) {
+        int total = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            int current = getValue(s.charAt(i));
+
+            if (i < s.length() - 1 && current < getValue(s.charAt(i + 1))) {
+                total -= current;
+            } else {
+                total += current;
+            }
+        }
+
+        return total;
+    }
+
+    private int getValue(char c) {
+        switch (c) {
+            case 'I':
+                return 1;
+            case 'V':
+                return 5;
+            case 'X':
+                return 10;
+            case 'L':
+                return 50;
+            case 'C':
+                return 100;
+            case 'D':
+                return 500;
+            case 'M':
+                return 1000;
+            default:
+                return 0;
+        }
+    }
+}
+
+4.Find All Numbers Disappeared in an Array là Các số nằm trong [1, n] tìm những số bị thiếu nếu thấy số x thì đánh dấu index = x - 1 bằng cách đổi thành số âm.Vì nums[i] ∈ [1,n] nên ánh xạ nhau
+
+Code:
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Solution {
+    public List<Integer> findDisappearedNumbers(int[] nums) 
+        List<Integer> result = new ArrayList<>();
+
+        // Đánh dấu các số đã xuất hiện
+        for (int i = 0; i < nums.length; i++) {
+            int index = Math.abs(nums[i]) - 1;
+
+            if (nums[index] > 0) {
+                nums[index] = -nums[index];
+            }
+        }
+
+        // Những vị trí còn dương là số bị thiếu
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] > 0) {
+                result.add(i + 1);
+            }
+        }
+
+        return result;
+    }
+}
+
+5.Pollng là client liên tục hỏi server theo một khoảng thời gian cố định xem có dữ liệu mới không theo chu kỳ
+
+-Client gửi request
+
+-Server trả lời ngay
+
+-Client chờ vài giây rồi hỏi lại
+
+-Quá trình lặp đi lặp lại
+
+6.Long polling là client hỏi server nhưng server sẽ giữ request lại cho đến khi có dữ liệu mới hoặc hết thời gian chờ
+
+-Client gửi reques
+
+-Nếu chưa có dữ liệu mới, Server không trả lời ngay mà giữ request
+
+-Khi có dữ liệu mới, Server trả về response
+
+-Client nhận được dữ liệu và gửi request mới
+
+-Long Polling là giải pháp trung gian giữa Short Polling và Push/WebSocket giảm số request dư thừa nhưng vẫn tận dụng được HTTP
