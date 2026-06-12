@@ -1,0 +1,110 @@
+1.SSE là cơ chế cho phép Server liên tục gửi dữ liệu đến Client thông qua một kết nối HTTP duy nhất, khi chỉ cần cập nhật dữ liệu realtime từ Server xuống Client mà không cần Client gửi dữ liệu ngược lại
+
+-Client gửi một HTTP request đến Server
+
+-Server giữ kết nối đó mở
+
+-Mỗi khi có dữ liệu mới, Server gửi dữ liệu xuống Client
+
+-Client nhận dữ liệu liên tục mà không cần gửi request mới
+
+2.Valid Palindrome u khi bỏ ký tự không phải chữ và số và khi chuyển về chữ thường chuỗi có đọc xuôi giống đọc ngược được không
+
+Code:
+class Solution {
+    public boolean isPalindrome(String s) {
+
+        int left = 0;
+        int right = s.length() - 1;
+
+        while (left < right) {
+
+            // Bỏ qua ký tự không phải chữ hoặc số bên trái
+            while (left < right && !Character.isLetterOrDigit(s.charAt(left))) {
+                left++;
+            }
+
+            // Bỏ qua ký tự không phải chữ hoặc số bên phải
+            while (left < right && !Character.isLetterOrDigit(s.charAt(right))) {
+                right--;
+            }
+
+            // So sánh sau khi chuyển về chữ thường
+            if (Character.toLowerCase(s.charAt(left))
+                    != Character.toLowerCase(s.charAt(right))) {
+
+                return false;
+            }
+
+            // Tiến vào giữa
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+}
+
+3.Reverse String là đảo chuỗi tại chỗ đổi cặp chữ đầu cuối đầu +i và cuối -i đổi chỗ cho nhau (i là vị trí cách đầu/ cuối) cho đến khi trái  >= phải
+
+Code:
+
+class Solution {
+    public void reverseString(char[] s) {
+
+        int left = 0;
+        int right = s.length - 1;
+
+        while (left < right) {
+
+            // Đổi chỗ hai ký tự
+            char temp = s[left];
+            s[left] = s[right];
+            s[right] = temp;
+
+            // Tiến vào giữa
+            left++;
+            right--;
+        }
+    }
+}
+
+4.Merge sorted array là là cộng 2 mảng lại đi từ cuối cho nên vị trí cuối luôn chứa số lớn nhất còn lại
+
+Code:
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+
+        // Con trỏ cuối phần tử thực sự của nums1
+        int i = m - 1;
+
+        // Con trỏ cuối nums2
+        int j = n - 1;
+
+        // Vị trí ghi kết quả
+        int k = m + n - 1;
+
+        // Ghép từ cuối về đầu
+        while (i >= 0 && j >= 0) {
+
+            // Chọn phần tử lớn hơn đặt ở cuối
+            if (nums1[i] > nums2[j]) {
+                nums1[k] = nums1[i];
+                i--;
+            } else {
+                nums1[k] = nums2[j];
+                j--;
+            }
+
+            k--;
+        }
+
+        // Nếu nums2 vẫn còn phần tử
+        while (j >= 0) {
+            nums1[k] = nums2[j];
+
+            j--;
+            k--;
+        }
+    }
+}
