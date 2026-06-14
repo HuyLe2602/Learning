@@ -1,0 +1,141 @@
+1. Remove Duplicates from Sorted Array là dung mảng đã sắp xếp tăng dần nên các phần tử trùng nhau sẽ nằm cạnh nhau dùng hai con trỏ một để duyệt, một để ghi 
+
+Code:
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int k = 1; // bắt đầu với phần tử đầu tiên luôn là duy nhất
+        for (int i = 1; i < nums.length; i++) { //duyệt từ phần tử thứ 2
+            if (nums[i] != nums[k - 1]) { 
+                //ghi đè phần tử mới duy nhất
+                nums[k] = nums[i];
+                k++;
+            }
+        }
+        return k;
+    }
+}
+
+
+2.Remove Element là dùng một con trỏ k để ghi lại các phần tử khác val
+
+Code:
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int k = 0;  //vị trí ghi
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != val) {   //nếu phần tử khác val thì giữ lại
+                nums[k] = nums[i];  //ghi đè
+                k++;
+            }
+        }
+        return k;
+    }
+}
+
+3.Palindrome Number là không cần chuyển sang chuỗi mà trực tiếp đảo ngược nửa số rồi so sánh với nửa còn lại
+
+Code:
+class Solution {
+    public boolean isPalindrome(int x) {
+        if (x < 0 || (x % 10 == 0 && x != 0)) return false;
+        int reversed = 0;   // số đảo ngược nửa sau
+        while (x > reversed) {
+            //đảo ngược nửa số
+            reversed = reversed * 10 + x % 10;  // lấy chữ số cuối của x
+            x /= 10;    // bỏ chữ số cuối của x
+        }
+        return x == reversed || x == reversed / 10;
+        //so sánh nửa trước và nửa sau
+    }
+}
+
+
+4.Squares of a Sorted Array vì mảng đã sắp xếp số âm khi bình phương có thể lớn hơn số dương ta dùng hai con trỏ từ hai đầu để chọn số lớn nhất sau khi bình phương
+
+Code:
+
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        int n = nums.length;
+        int[] result = new int[n];
+        int left = 0, right = n - 1, pos = n - 1; // điền từ cuối mảng
+        while (left <= right) {
+            int l = nums[left] * nums[left];
+            int r = nums[right] * nums[right];
+            if (l > r) {
+                result[pos--] = l; // ghi số lớn hơn vào cuối
+                left++;
+            } else {
+                result[pos--] = r;
+                right--;
+            }
+        }
+        return result;
+    }
+}
+
+
+5.Backspace String Compare dùng StringBuilder như stack để mô phỏng thao tác backspace
+
+Code:
+
+class Solution {
+    public boolean backspaceCompare(String s, String t) {
+        return build(s).equals(build(t)); // so sánh kết quả sau xử lý
+    }
+
+    private String build(String str) {
+        StringBuilder sb = new StringBuilder();
+        for (char c : str.toCharArray()) {
+            if (c != '#') {
+                sb.append(c); // thêm ký tự bình thường
+            } else if (sb.length() > 0) {
+                sb.deleteCharAt(sb.length() - 1)
+                // hoạt động chính: xóa ký tự cuối cùng
+            }
+        }
+        return sb.toString();
+    }
+}
+
+6.Move Zeroes dùng hai con trỏ một để duyệt một để ghi số khác 0 lên trước sau đó điền 0 vào cuối
+
+Code:
+
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int k = 0; // vị trí ghi số khác 0
+        for (int i = 0; i < nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[k++] = nums[i]; // ghi số khác 0 lên trước
+            }
+        }
+        while (k < nums.length) {
+            nums[k++] = 0; // điền 0 vào các vị trí còn lại
+        }
+    }
+}
+
+
+7.Pub/Sub là mô hình giao tiếp mà một bên phát thông điệp (Publisher) và nhiều bên khác nhận thông điệp đó (Subscribers)
+
+Hoạt động:
+
+-Publisher gửi message vào một Topic
+
+-Broker (Kafka, RabbitMQ, Redis Pub/Sub,...) nhận message
+
+-Tất cả Subscriber đăng ký Topic đó sẽ nhận được message
+
+-Tóm lại: Pub/Sub là một người phát, nhiều người nhận
+
+8.Multiplexing là gộp nhiều luồng dữ liệu vào chung một kết nối
+
+-Demultiplexing là tách một kết nối chung thành nhiều luồng xử lý riêng
+
+-HTTP/1.1 chrome mở nhiều TCP connection mỗi request chiếm một connection nhưng chrome giới hạn 6 connections/domain nên khi đầy request mới phải chờ
+
+-HTTP/2 dùng 1 TCP connection và nhiều stream .CPU server phải phân tích (parse) nhiều stream trên cùng một connection nên đổi ít connection lấy nhiều CPU hơn
+
+-Connection Pooling là tạo sẵn nhiều connection và tái sử dụng là 1 dạng glorified multiplexing thực chat là Multiplexing "nâng cấp"
