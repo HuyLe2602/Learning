@@ -1,0 +1,188 @@
+1.Valid Palindrome II là kiểm tra chuỗi đối xứng không khi xoá tối đa 1 ký tự chạy con trỏ từ 2 đầu nếu khác nhau thì xoá bên đầu trái hoặc phải kiểm tra lại lần nữa xem có đối xứng không nếu có thì true không thì false
+
+-Lí do chọn cách này: Độ phức tạp O(n) nhanh và phù hợp với chuỗi dài tránh cách brute force (xóa từng ký tự rồi kiểm tra) vốn tốn O(n²)
+
+-Code:
+
+class Solution {
+    public boolean validPalindrome(String s) {
+        int left = 0;	//đầu
+        int right = s.length() - 1;	//đuôi
+
+        // Duyệt từ hai đầu vào giữa
+        while (left < right) {
+            if (s.charAt(left) == s.charAt(right)) {
+                // Nếu giống nhau thì tiếp tục
+                left++;	// tang vị trí xét( thụt vào bên phải)
+                right--;//giảm vị trí xét (thụt vào bên trái)
+            } else {
+                // Nếu khác nhau thì thử bỏ 1 ký tự
+                return isPalindrome(s, left + 1, right) ||
+                       isPalindrome(s, left, right - 1);
+            }
+        }
+        return true; // Nếu không gặp lỗi nào thì là palindrome
+    }
+
+    // Hàm phụ kiểm tra chuỗi con có phải palindrome không
+    private boolean isPalindrome(String s, int left, int right) {
+        while (left < right) {
+            if (s.charAt(left) != s.charAt(right)) {
+                return false; // Nếu khác nhau thì không phải palindrome
+            }
+            left++;
+            right--;
+        }
+        return true; // Nếu duyệt hết thì là palindrome
+    }
+}
+
+
+2.Delete Characters to Make Fancy String  là xoá ký tự để tránh chuỗi 3 ký tự liên tiếp giống nhau
+ 
+Duyệt chuỗi từ trái sang phải xây dựng kết quả:
+
+Nếu ký tự hiện tại cùng với 2 ký tự cuối trong kết quả tạo thành 3 ký tự giống nhau thì bỏ qua.
+
+Ngược lại thì thêm vào kết quả
+
+-Lí do chọn cách giải:
+
+Chỉ cần duyệt một lần thì độ phức tạp O(n)
+
+Không cần xóa nhiều lần hay kiểm tra lại toàn bộ chuỗi
+
+Đảm bảo kết quả là duy nhất vì ta luôn bỏ ký tự thừa ngay khi gặp
+
+-Code:class Solution {
+    public String makeFancyString(String s) {
+        // Tạo StringBuilder để lưu kết quả
+        StringBuilder result = new StringBuilder();
+ 
+        // Duyệt qua từng ký tự trong chuỗi s
+        for (char c : s.toCharArray()) {
+            // Lấy độ dài hiện tại của result
+            int len = result.length();
+ 
+            // Nếu đã có >=2 ký tự cuối giống ký tự hiện tại c
+            // thì bỏ qua để tránh tạo thành 3 ký tự liên tiếp giống nhau
+            if (len >= 2 && result.charAt(len - 1) == c && result.charAt(len - 2) == c) {
+                continue; // bỏ qua ký tự này
+            }
+ 
+            // Nếu không vi phạm, thêm ký tự vào kết quả
+            result.append(c);
+        }
+ 
+        // Trả về chuỗi kết quả sau khi xử lý
+        return result.toString();
+    }
+}
+
+
+3.Reverse Vowels of a String là đảo ngược vị trí các nguyên âm (a, e, i, o, u, cả hoa và thường) trong chuỗi
+
+-Dùng hai con trỏ:
+
+Một con trỏ từ đầu (left), một từ cuối (right)
+
+Di chuyển cho đến khi cả hai cùng trỏ vào nguyên âm
+
+Đổi chỗ hai nguyên âm này
+
+Tiếp tục cho đến khi left >= right
+
+-Lí do chọn cách này:
+
+Hai con trỏ giúp ta chỉ duyệt chuỗi một lần độ phức tạp O(n)
+
+Không cần tạo danh sách phụ để lưu nguyên âm rồi đảo ngược để tiết kiệm bộ nhớ
+
+Đây là cách trực tiếp và hiệu quả nhất cho chuỗi dài (tới 3 * 10⁵ ký tự)
+
+-Code:
+class Solution {
+    public String reverseVowels(String s) {
+        // Chuyển chuỗi thành mảng ký tự để dễ thay đổi
+        char[] arr = s.toCharArray();
+        
+        // Khởi tạo hai con trỏ
+        int left = 0;
+        int right = arr.length - 1;
+        
+        // Duyệt cho đến khi hai con trỏ gặp nhau
+        while (left < right) {
+            // Di chuyển left cho đến khi gặp nguyên âm
+            while (left < right && !isVowel(arr[left])) {
+                left++;
+            }
+            
+            // Di chuyển right cho đến khi gặp nguyên âm
+            while (left < right && !isVowel(arr[right])) {
+                right--;
+            }
+            
+            // Đổi chỗ hai nguyên âm
+            char temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
+            
+            // Tiến/lùi con trỏ
+            left++;
+            right--;
+        }
+        
+        // Trả về chuỗi mới sau khi đảo nguyên âm
+        return new String(arr);
+    }
+    
+    // Hàm phụ kiểm tra ký tự có phải nguyên âm không
+    private boolean isVowel(char c) {
+        return "aeiouAEIOU".indexOf(c) != -1;
+    }
+}
+
+4.Stateful là khi backend lưu trạng thái (state) của client và phụ thuộc vào trạng thái đó để hoạt động
+
+-Stateless là khi backend không phụ thuộc vào state lưu trong chính nó
+
+-Nếu backend đang idle(đang rảnh) bạn restart nó và client vẫn tiếp tục workflow như chưa có chuyện gì xảy ra thì backend đó là Stateless
+
+-Ngược lại nếu restart làm client bị lỗi hoặc mất phiên làm việc thì là Stateful
+
+-TCP là Stateful
+
+Vì TCP lưu:
+
+Sequence Number
+
+Connection State
+
+Window Size
+Congestion Control
+
+Flow Control
+
+Nếu mất các thônng tin này thì Connection vô dung dẫn đến phải reset cho nên TCP phải phụ thuộc vào state để hoạt động
+
+-UDP là Stateless UPD chỉ gửi datagram đi luôn không lưu Connection,squence,window nếu mất thông tin thì UPD không quan tâm
+
+-DNS chạy trên UDP do UDP không có connection nên DNS phải tự them Query ID
+
+-HTTP là Stateless
+
+Mỗi request chứa đủ thông tin cần thiết
+
+Nếu TCP chết HTTP tạo TCP mới nhưng vẫn tiếp tục hoạt động
+
+HTTP không phụ thuộc vào TCP cũ
+
+-QUIC là Stateful
+
+Mặc dù chạy trên UDP nhưng QUIC duy trì Connection ID và nhiều state giống TCP
+
+-Session gửi token kiểm tra database nếu token bị đánh cắp thì database sẽ đánh dấu invalid và token sẽ mất hiệu lực
+
+-JWT gần như là Stateless mọi thông tin nằm trong token
+
+JWT sẽ để Backed tự verify mà không cần database nêu bị đánh cắp thì không thể thu hồi ngay mà phải chờ token hết hạn
