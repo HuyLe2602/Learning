@@ -1,0 +1,381 @@
+1.Valid Parentheses là dung stack để lưu dấu mở 
+
+Khi mở push vào stack
+
+Khi gặp dấu đóng thì kiểm tra stack
+
+Nếu rỗng hoặc không khớp thì dấu mở trên cùng thì false
+
+Nếu khớp thì pop ra
+
+Nếu stack rỗng thì true ngược lại thì false
+
+-Stack là cấu trúc dữ liệu phù hợp nhất cho bài toán kiểm tra ngoặc vì nó tuân theo nguyên tắc LIFO
+
+Độ phức tạp chỉ O(n) duyệt chuỗi một lần
+
+Trực quan dễ cài đặt và đảm bảo tính đúng đắn
+
+-Code:
+import java.util.Stack;
+
+class Solution {
+    public boolean isValid(String s) {
+        // Tạo stack để lưu dấu ngoặc mở
+        Stack<Character> stack = new Stack<>();
+        
+        // Duyệt từng ký tự trong chuỗi
+        for (char c : s.toCharArray()) {
+            // Nếu là dấu mở thì push vào stack
+            if (c == '(' || c == '{' || c == '[') {
+                stack.push(c);
+            } else {
+                // Nếu gặp dấu đóng mà stack rỗng → sai
+                if (stack.isEmpty()) return false;
+                
+                // Lấy dấu mở trên cùng để kiểm tra
+                char top = stack.pop();
+                
+                // Kiểm tra có khớp loại ngoặc không
+                if ((c == ')' && top != '(') ||
+                    (c == '}' && top != '{') ||
+                    (c == ']' && top != '[')) {
+                    return false; // không khớp là sai
+                }
+            }
+        }
+        
+        // Nếu sau cùng stack rỗng thì hợp lệ
+        return stack.isEmpty();
+    }
+}
+
+2. Implement Stack using Queues là cài đặt stack bằng cách dùng queue
+
+Push tốn thời gian mỗi lần push ta đưa phần tử mới vào queue phụ rồi chuyển toàn bộ queue chính sang để đảm bảo phần tử mới luôn ở đầu
+
+-Với cách này ta đảm bảo phần tử mới nhất luôn ở đầu queue để dễ dàng lấy ra khi pop hoặc top
+
+Độ phức tạp:
+
+push O(n) (chuyển toàn bộ phần tử sang)
+
+pop, top, empty: O(1)
+
+Thích hợp khi số lần pop/top nhiều hơn push
+
+-Code:
+import java.util.LinkedList;
+import java.util.Queue;
+
+class MyStack {
+    // Dùng một queue chính để lưu stack
+    private Queue<Integer> queue;
+
+    public MyStack() {
+        // Khởi tạo queue rỗng
+        queue = new LinkedList<>();
+    }
+
+    // Thêm phần tử vào stack
+    public void push(int x) {
+        // Tạo queue tạm để đưa phần tử mới vào đầu
+        Queue<Integer> temp = new LinkedList<>();
+        temp.offer(x); // thêm phần tử mới vào queue tạm
+
+        // Chuyển toàn bộ phần tử cũ sang queue tạm
+        while (!queue.isEmpty()) {
+            temp.offer(queue.poll());
+        }
+
+        // Gán queue chính = queue tạm
+        queue = temp;
+    }
+
+    // Xóa và trả về phần tử trên cùng của stack
+    public int pop() {
+        return queue.poll(); // phần tử đầu chính là top của stack
+    }
+
+    // Trả về phần tử trên cùng của stack
+    public int top() {
+        return queue.peek(); // phần tử đầu chính là top
+    }
+
+    // Kiểm tra stack có rỗng không
+    public boolean empty() {
+        return queue.isEmpty();
+    }
+}
+
+
+3.Implement Queue using Stacks là cài đặt queue bằng stack
+
+Dùng 2 stack in và out
+
+khi push thì đưa vào inStack
+
+khi pop/peek nếu outStack rỗng thì chuyển toàn bộ inStack qua outStack
+
+Lúc này phần tử đầu tiên của queue sẽ nằm trên đỉnh outStack
+
+Nếu outStack không rỗng thì lấy trực tiếp từ đó
+
+-Cách này giúp push nhanh O(1) chỉ cần thêm vào inStack
+
+Pop/peek có thể tốn O(n) khi phải chuyển dữ liệu nhưng mỗi phần tử chỉ chuyển một lần duy nhất từ inStack sang outStack
+
+-Code:
+
+import java.util.Stack;
+
+class MyQueue {
+    // Hai stack: inStack để push, outStack để pop/peek
+    private Stack<Integer> inStack;
+    private Stack<Integer> outStack;
+
+    public MyQueue() {
+        // Khởi tạo hai stack rỗng
+        inStack = new Stack<>();
+        outStack = new Stack<>();
+    }
+
+    // Thêm phần tử vào cuối queue
+    public void push(int x) {
+        inStack.push(x); // chỉ cần push vào inStack
+    }
+
+    // Xóa và trả về phần tử đầu queue
+    public int pop() {
+        shiftStacks(); // đảm bảo outStack có dữ liệu
+        return outStack.pop(); // lấy phần tử trên cùng của outStack
+    }
+
+    // Trả về phần tử đầu queue nhưng không xóa
+    public int peek() {
+        shiftStacks(); // đảm bảo outStack có dữ liệu
+        return outStack.peek(); // xem phần tử trên cùng của outStack
+    }
+
+    // Kiểm tra queue có rỗng không
+    public boolean empty() {
+        return inStack.isEmpty() && outStack.isEmpty();
+    }
+
+    // Hàm phụ: chuyển dữ liệu từ inStack sang outStack nếu outStack rỗng
+    private void shiftStacks() {
+        if (outStack.isEmpty()) {
+            while (!inStack.isEmpty()) {
+                outStack.push(inStack.pop());
+            }
+        }
+    }
+}
+
+
+4.BaseBall Game ta dung Stack để lưu các điểm 
+
+Gặp số thì push vào stack
+
+Gặp C thì pop ra khỏi stack
+
+Gặp D thì thêm điểm gấp đôi push vào stack
+
+Gặp + thì lấy top2 cộng lại push vào stack
+
+Cộng tất cả phần tử Stack
+
+-Stack phù hợp vì ta luôn thao tác với điểm gần nhất (top)
+
+Độ phức tạp O(n) duyệt qua toàn bộ operations một lần
+
+-Code:
+
+import java.util.Stack;
+
+class Solution {
+    public int calPoints(String[] operations) {
+        // Tạo stack để lưu điểm
+        Stack<Integer> stack = new Stack<>();
+        
+        // Duyệt qua từng thao tác
+        for (String op : operations) {
+            if (op.equals("C")) {
+                // "C"  hủy điểm trước đó
+                stack.pop();
+            } else if (op.equals("D")) {
+                // "D"  gấp đôi điểm trước đó
+                stack.push(stack.peek() * 2);
+            } else if (op.equals("+")) {
+                // "+"  tổng 2 điểm trước đó
+                int top1 = stack.pop();      // lấy điểm gần nhất
+                int top2 = stack.peek();     // lấy điểm kế tiếp
+                stack.push(top1);            // đưa lại top1 vào stack
+                stack.push(top1 + top2);     // thêm tổng vào stack
+            } else {
+                // Nếu là số  thêm vào stack
+                stack.push(Integer.parseInt(op));
+            }
+        }
+        
+        // Tính tổng tất cả điểm trong stack
+        int sum = 0;
+        for (int score : stack) {
+            sum += score;
+        }
+        
+        return sum;
+    }
+}
+
+
+5.Remove All Adjacent Duplicates In String là loại bỏ các cặp ký tự giống nhau và liền kề bằng cách dung stack
+
+Duyệt chuỗi từ trái sang phải
+
+Nếu stack rỗng hoặc ký tự hiện tại khác ký tự trên cùng thì push vào stack
+
+Nếu ký tự hiện tại giống ký tự trên cùng thì pop (xóa cặp trùng)
+
+Cuối cùng ghép các ký tự còn lại trong stack thành chuỗi kết quả
+
+-Stack phù hợp vì ta luôn thao tác với ký tự gần nhất (top)
+
+Độ phức tạp O(n) duyệt chuỗi một lần
+
+-Code:
+
+import java.util.Stack;
+
+class Solution {
+    public String removeDuplicates(String s) {
+        // Tạo stack để lưu ký tự
+        Stack<Character> stack = new Stack<>();
+        
+        // Duyệt từng ký tự trong chuỗi
+        for (char c : s.toCharArray()) {
+            // Nếu stack không rỗng và ký tự hiện tại giống ký tự trên cùng
+            if (!stack.isEmpty() && stack.peek() == c) {
+                stack.pop(); // loại bỏ cặp trùng
+            } else {
+                stack.push(c); // thêm ký tự vào stack
+            }
+        }
+        
+        // Ghép các ký tự còn lại trong stack thành chuỗi kết quả
+        StringBuilder result = new StringBuilder();
+        for (char c : stack) {
+            result.append(c);
+        }
+        
+        return result.toString();
+    }
+}
+
+
+6.Make The String Great là loại bỏ cặp chữ giống nhau nhưng khac chữ hoa và thường dung Stack để giải quyết 
+
+Duyệt chuỗi từ trái sang phải
+
+Nếu stack rỗng thì push ký tự vào
+
+Nếu ký tự hiện tại và ký tự trên cùng của stack là cùng chữ cái nhưng khác hoa/thường thì pop (loại bỏ cặp này)
+
+Ngược lại thì push ký tự vào stack
+
+Cuối cùng ghép các ký tự còn lại trong stack thành chuỗi kết quả
+
+-Stack phù hợp vì ta luôn cần so sánh ký tự hiện tại với ký tự liền trước
+
+Độ phức tạp O(n) duyệt chuỗi một lần
+
+-Code:
+
+import java.util.Stack;
+
+class Solution {
+    public String makeGood(String s) {
+        // Tạo stack để lưu ký tự
+        Stack<Character> stack = new Stack<>();
+        
+        // Duyệt từng ký tự trong chuỗi
+        for (char c : s.toCharArray()) {
+            // Nếu stack không rỗng và ký tự hiện tại tạo thành cặp "bad" với ký tự trên cùng
+            if (!stack.isEmpty() && Math.abs(stack.peek() - c) == 32) {
+                // Loại bỏ cặp này (khác hoa/thường nhưng cùng chữ cái)
+                stack.pop();
+            } else {
+                // Nếu không vi phạm thì thêm ký tự vào stack
+                stack.push(c);
+            }
+        }
+        
+        // Ghép các ký tự còn lại trong stack thành chuỗi kết quả
+        StringBuilder result = new StringBuilder();
+        for (char c : stack) {
+            result.append(c);
+        }
+        
+        return result.toString();
+    }
+}
+
+
+7.Mỗi protocol (HTTP, gRPC, TLS…) cần thư viện riêng gắn chặt với ngôn ngữ
+
+-Thay đổi hoặc nâng cấp thư viện khó dễ gây lỗi và phải retest toàn bộ
+
+-Microservices vì thế trở nên phức tạp và khó mở rộng
+
+-Đặt một proxy chạy kèm ứng dụng (sidecar)
+
+-Sidecar không phải để làm ứng dụng nhanh hơn
+
+-Mục tiêu của nó là tách phần networking ra khỏi application
+
+-Application chỉ tập trung vào Business Logic
+
+-Còn proxy lo:
+
+HTTP
+
+TLS
+
+Retry
+
+Tracing
+
+Load Balancing
+
+Caching
+
+Monitoring
+
+Service Discovery
+
+-Service Mesh được xây dựng dựa trên Sidecar Pattern
+
+
+8.Mỗi protocol được tạo ra để giải quyết một vấn đề cụ thể. Không có protocol nào tốt nhất cho mọi trường hợp
+
+-Protocol là Bộ quy tắc giao tiếp
+
+Nếu hai bên tuân theo cùng một bộ quy tắc thì chúng có thể giao tiếp với nhau
+
+-Khi thiết kế protocol luôn phải đánh đổi (trade-offs) không thể có mọi thứ cùng lúc
+
+-Các thuộc tính quan trọng của một protocol
+
+Data Format
+
+Transfer Mode
+
+Addressing
+
+Directionality
+
+Stateful hay Stateless
+
+Reliability
+
+Error Handling
