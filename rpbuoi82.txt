@@ -1,0 +1,160 @@
+1.Next Greater Element 1:Dùng stack để duyệt nums2 từ trái sang phải
+
+Khi gặp phần tử lớn hơn phần tử trên cùng của stack thì đó chính là "next greater element" của phần tử trên cùng
+
+Lưu kết quả vào map (ánh xạ từ phần tử sang next greater)
+
+Pop phần tử khỏi stack
+
+Push phần tử hiện tại vào stack
+
+Sau khi duyệt xong các phần tử còn lại trong stack không có next greater thì ánh xạ -1
+
+Cuối cùng với mỗi phần tử trong nums1 tra kết quả từ map
+
+-Stack và HashMap giúp ta tìm next greater element trong O(n) thay vì O(n²)
+
+Đây là cách tối ưu thường dùng trong các bài toán "Next Greater Element"
+
+-Code:
+
+import java.util.*;
+
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        // Map để lưu kết quả: phần tử -> next greater
+        Map<Integer, Integer> map = new HashMap<>();
+        
+        // Stack để hỗ trợ tìm next greater
+        Stack<Integer> stack = new Stack<>();
+        
+        // Duyệt qua nums2
+        for (int num : nums2) {
+            // Nếu num lớn hơn phần tử trên cùng của stack
+            while (!stack.isEmpty() && num > stack.peek()) {
+                // num chính là next greater của phần tử trên cùng
+                map.put(stack.pop(), num);
+            }
+            // Push num vào stack
+            stack.push(num);
+        }
+        
+        // Các phần tử còn lại trong stack không có next greater
+        while (!stack.isEmpty()) {
+            map.put(stack.pop(), -1);
+        }
+        
+        // Tạo mảng kết quả cho nums1
+        int[] result = new int[nums1.length];
+        for (int i = 0; i < nums1.length; i++) {
+            result[i] = map.get(nums1[i]); // tra từ map
+        }
+        
+        return result;
+    }
+}
+
+
+2.Remove Outermost Parentheses: Dùng biến count để theo dõi số lượng ngoặc mở
+
+Duyệt từng ký tự:
+
+Nếu gặp '(' thì tăng count nếu count > 1 thì thêm vào kết quả (vì đây không phải ngoặc ngoài cùng)
+
+Nếu gặp ')' thì giảm count nếu count > 0 thì thêm vào kết quả (vì đây không phải ngoặc ngoài cùng)
+
+Cuối cùng trả về chuỗi kết quả
+
+-Không cần dùng stack phức tạp chỉ cần biến đếm count
+
+Độ phức tạp O(n) duyệt chuỗi một lần
+
+-Code:
+
+class Solution {
+    public String removeOuterParentheses(String s) {
+        // StringBuilder để lưu kết quả
+        StringBuilder result = new StringBuilder();
+        
+        // Biến đếm số ngoặc mở
+        int count = 0;
+        
+        // Duyệt từng ký tự trong chuỗi
+        for (char c : s.toCharArray()) {
+            if (c == '(') {
+                // Nếu count > 0 thì đây không phải ngoặc ngoài cùng thì thêm vào kết quả
+                if (count > 0) {
+                    result.append(c);
+                }
+                count++; // tăng số ngoặc mở
+            } else {
+                count--; // giảm số ngoặc mở
+                // Nếu count > 0 thì đây không phải ngoặc ngoài cùng thì thêm vào kết quả
+                if (count > 0) {
+                    result.append(c);
+                }
+            }
+        }
+        
+        // Trả về chuỗi kết quả sau khi xóa ngoặc ngoài cùng
+        return result.toString();
+    }
+}
+
+
+3. Final Prices With a Special Discount in a Shop 
+Với mỗi sản phẩm i ta cần tìm sản phẩm j (với j > i) sao cho prices[j] <= prices[i]
+
+Nếu tìm thấy giá cuối cùng của sản phẩm i là prices[i] - prices[j]
+
+Nếu không tìm thấy giá cuối cùng giữ nguyên là prices[i]
+
+Dùng stack để duyệt từ phải sang trái tìm phần tử nhỏ hơn hoặc bằng nhanh hơn
+
+-Chỉ cần duyệt một lần từ phải sang trái độ phức tạp O(n)
+
+-Code:
+class Solution {
+    public int[] finalPrices(int[] prices) {
+        int n = prices.length;
+        int[] result = new int[n];
+        
+        // Duyệt từng sản phẩm
+        for (int i = 0; i < n; i++) {
+            // Mặc định giá cuối cùng là giá gốc
+            result[i] = prices[i];
+            
+            // Tìm sản phẩm j phía sau thỏa điều kiện
+            for (int j = i + 1; j < n; j++) {
+                if (prices[j] <= prices[i]) {
+                    // Nếu tìm thấy, áp dụng giảm giá
+                    result[i] = prices[i] - prices[j];
+                    break; // dừng ngay vì chỉ cần j nhỏ nhất
+                }
+            }
+        }
+        
+        return result;
+    }
+}
+
+
+4.Mọi thứ đều là Trade-off
+
+Không có giải pháp nào tốt nhất
+
+Chọn TCP thì Reliable nhưng chậm hơn và phức tạp hơn
+Chọn UDP thì nhanh nhưng không đảm bảo dữ liệu
+Chọn Stateful được nhanh nhưng khó scale
+Chọn Stateless thì dễ scale nhưng tốn DB/Cache
+Chọn HTTP/1.1 thì đơn giản nhưng nhiều connection
+CHọn HTTP/2	thì ít connection nhưng tốn CPU hơn
+
+-Connection là tài nguyên quý giá
+
+Backend không chỉ xử lý request
+
+Backend còn phải quản lý TCP Connections, Connection Pools, HTTP Streams, Database Connections
+
+-Giảm Coupling giữa các thành phần thành phần nào không cần biết nhau thì đừng để chúng phụ thuộc trực tiếp vào nhau
+
