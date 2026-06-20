@@ -1,0 +1,482 @@
+1.Arranging Coins là tìm số hàng hoàn chỉnh có thể xếp được có 2 giải pháp là  trừ dần số xu cho đến khi không đủ để tạo hàng tiếp theo và dùng công thức toán học
+
+Tổng số xu cần cho k hàng = k * (k + 1) / 2
+
+Tìm k lớn nhất sao cho k * (k + 1) / 2 <= n
+
+Có thể dùng binary search để tìm nhanh
+
+-Chọn cách binary search vì  chỉ cần O(log n) phù hợp với n lớn (tới 2^31 - 1)
+
+-Code:
+
+class Solution {
+    public int arrangeCoins(int n) {
+        // Dùng binary search để tìm số hàng hoàn chỉnh
+        long left = 0, right = n; // dùng long để tránh tràn số
+        
+        while (left <= right) {
+            long mid = left + (right - left) / 2; // tính mid
+            
+            long coins = mid * (mid + 1) / 2; // tổng xu cần cho mid hàng
+            
+            if (coins == n) {
+                return (int) mid; // vừa đủ thì trả về mid
+            } else if (coins < n) {
+                left = mid + 1; // còn dư xu →/thì thử nhiều hàng hơn
+            } else {
+                right = mid - 1; // thiếu xu thì giảm số hàng
+            }
+        }
+        
+        // Khi vòng lặp kết thúc right là số hàng hoàn chỉnh lớn nhất
+        return (int) right;
+    }
+}
+
+2.Binary Search tìm vị trí của target trong mảng nếu không tồn tại thì trả về -1
+
+-Dùng binary search (tìm kiếm nhị phân)
+
+Khởi tạo hai biến left và right để chỉ phạm vi tìm kiếm
+
+Tính mid = (left + right) / 2
+
+Nếu nums[mid] == target thì trả về mid
+
+Nếu nums[mid] < target thì dịch left = mid + 1
+
+Nếu nums[mid] > target thì dịch right = mid - 1
+
+Lặp lại cho đến khi left > right
+
+-Binary search có độ phức tạp O(log n) nhanh hơn nhiều so với duyệt tuyến tính O(n)
+
+Đảm bảo tìm kiếm chính xác và hiệu quả ngay cả với mảng lớn
+
+-Code:
+
+class Solution {
+    public int search(int[] nums, int target) {
+        // Khởi tạo hai biến biên trái và phải
+        int left = 0;
+        int right = nums.length - 1;
+        
+        // Vòng lặp tìm kiếm nhị phân
+        while (left <= right) {
+            // Tính chỉ số giữa
+            int mid = left + (right - left) / 2;
+            
+            // Nếu tìm thấy target tại mid
+            if (nums[mid] == target) {
+                return mid;
+            }
+            
+            // Nếu target lớn hơn giá trị mid thì dịch sang phải
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                // Nếu target nhỏ hơn giá trị mid thì dịch sang trái
+                right = mid - 1;
+            }
+        }
+        
+        // Nếu không tìm thấy target
+        return -1;
+    }
+}
+
+
+3.Search Insert Position nếu target tồn tại trong mảng thì trả về chỉ số của nó
+
+Nếu không tồn tại thì trả về chỉ số mà target sẽ được chèn vào để giữ mảng tăng dần
+
+Dùng binary search để tìm vị trí thích hợp
+
+Nếu tìm thấy target thì trả về mid
+
+Nếu không tìm thấy thì khi vòng lặp kết thúc left chính là vị trí cần chèn
+
+-Binary search có độ phức tạp O(log n) nhanh hơn nhiều so với duyệt tuyến tính O(n)
+
+Khi không tìm thấy biến left sẽ dừng ở vị trí thích hợp để chèn target
+
+-Code:
+
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+        // Khởi tạo biên trái và phải
+        int left = 0;
+        int right = nums.length - 1;
+        
+        // Vòng lặp tìm kiếm nhị phân
+        while (left <= right) {
+            // Tính chỉ số giữa
+            int mid = left + (right - left) / 2;
+            
+            // Nếu tìm thấy target tại mid
+            if (nums[mid] == target) {
+                return mid;
+            }
+            
+            // Nếu target lớn hơn giá trị mid thì dịch sang phải
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                // Nếu target nhỏ hơn giá trị mid thì dịch sang trái
+                right = mid - 1;
+            }
+        }
+        
+        // Nếu không tìm thấy left chính là vị trí cần chèn
+        return left;
+    }
+}
+
+4.Guess Number Higher or Lower dùng binary search để giảm số lần đoán
+
+Khởi tạo left = 1 right = n
+
+Tính mid = (left + right) / 2
+
+Gọi guess(mid) để kiểm tra
+
+Nếu guess(mid) == 0 thì tìm thấy số bí mật
+
+Nếu guess(mid) == -1 thì số bí mật nhỏ hơn ta dịch right = mid - 1
+
+Nếu guess(mid) == 1 thì số bí mật lớn hơn ta dịch left = mid + 1
+
+-Binary search có độ phức tạp O(log n) nhanh hơn nhiều so với duyệt tuyến tính O(n)
+
+-Code:
+
+/** 
+ * Forward declaration of guess API.
+ * @param num   your guess
+ * @return      -1 if num is higher than the picked number
+ *              1 if num is lower than the picked number
+ *              otherwise return 0
+ */
+
+
+public class Solution extends GuessGame {
+    public int guessNumber(int n) {
+        // Khởi tạo biên trái và phải
+        int left = 1;
+        int right = n;
+        
+        // Vòng lặp tìm kiếm nhị phân
+        while (left <= right) {
+            // Tính chỉ số giữa
+            int mid = left + (right - left) / 2;
+            
+            // Gọi API guess để kiểm tra
+            int res = guess(mid);
+            
+            if (res == 0) {
+                return mid; // tìm thấy số bí mật
+            } else if (res == -1) {
+                right = mid - 1; // số bí mật nhỏ hơn thì dịch sang trái
+            } else {
+                left = mid + 1; // số bí mật lớn hơn thì dịch sang phải
+            }
+        }
+        
+        // Trường hợp mặc định (không xảy ra vì luôn có số bí mật)
+        return -1;
+    }
+}
+
+5.Sqrt(x) dùng binary search
+
+Vì căn bậc hai của x luôn nằm trong khoảng [0, x]
+
+Ta tìm số nguyên mid sao cho mid * mid <= x nhưng (mid + 1) * (mid + 1) > x
+
+Khi đó mid chính là kết quả
+
+-Binary search có độ phức tạp O(log x) nhanh hơn nhiều so với thử tuần tự O(x)
+
+Tránh tràn số bằng cách dùng long khi tính mid * mid
+
+-Code:
+
+class Solution {
+    public int mySqrt(int x) {
+        // Trường hợp đặc biệt
+        if (x == 0 || x == 1) return x;
+        
+        // Khởi tạo biên trái và phải
+        int left = 1;
+        int right = x;
+        int ans = 0; // lưu kết quả
+        
+        // Vòng lặp binary search
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            
+            // Dùng long để tránh tràn số khi nhân
+            long square = (long) mid * mid;
+            
+            if (square == x) {
+                return mid; // tìm thấy căn chính xác
+            } else if (square < x) {
+                ans = mid; // mid là ứng viên hợp lệ
+                left = mid + 1; // thử số lớn hơn
+            } else {
+                right = mid - 1; // thử số nhỏ hơn
+            }
+        }
+        
+        // Trả về kết quả làm tròn xuống
+        return ans;
+    }
+}
+
+6. Valid Perfect Square là cho số nguyên dương num kiểm tra xem nó có phải là số chính phương hay không
+
+Dùng binary search để tìm k
+
+Phạm vi tìm kiếm từ 1 đến num
+
+Tính mid = (left + right) / 2
+
+Nếu mid * mid == num thì đúng là số chính phương
+
+Nếu mid * mid < num thì dịch left = mid + 1
+
+Nếu mid * mid > num thì dịch right = mid - 1
+
+Nếu không tìm thấy trả về false
+
+-Binary search có độ phức tạp O(log x) nhanh hơn nhiều so với thử tuần tự O(x)
+
+Tránh tràn số bằng cách dùng long khi tính mid * mid
+
+-Code:
+class Solution {
+    public boolean isPerfectSquare(int num) {
+        // Trường hợp đặc biệt
+        if (num == 1) return true;
+        
+        // Khởi tạo biên trái và phải
+        long left = 1;
+        long right = num;
+        
+        // Vòng lặp binary search
+        while (left <= right) {
+            long mid = left + (right - left) / 2;
+            long square = mid * mid;
+            
+            if (square == num) {
+                return true; // tìm thấy số chính phương
+            } else if (square < num) {
+                left = mid + 1; // thử số lớn hơn
+            } else {
+                right = mid - 1; // thử số nhỏ hơn
+            }
+        }
+        
+        // Không tìm thấy số chính phương
+        return false;
+    }
+}
+
+6.UDP là giao thức Layer 4 rất đơn giản
+
+-DP (User Datagram Protocol) nằm trên IP và có nhiệm vụ:
+
+Gửi dữ liệu
+
+Nhận dữ liệu
+
+Không làm gì thêm
+
+
+Nó không quan tâm:
+
+Gói tin có tới nơi hay không
+
+Có mất gói hay không
+
+Có đúng thứ tự hay không
+
+Bên kia đã nhận chưa
+
+-UDP là giao thức Message-based
+
+Khác với TCP là một luồng byte (stream) UDP gửi từng thông điệp riêng biệt (datagram)
+
+-UDP là Stateless
+
+Không lưu trạng thái
+
+Không có:
+
+Connection
+
+Sequence number
+
+Window size
+
+Buffer state
+
+Mỗi datagram độc lập với nhau
+
+Vì vậy:
+
+Không cần handshake
+
+Có thể gửi ngay lập tức
+
+-Connectionless không cần thiết lập kết nối trước
+
+TCP:
+
+Handshake chuyển tới truyền dữ liệu
+
+UDP thì gửi luôn nên đó là lý do UDP có độ trễ thấp
+
+-UDP sử dụng Port để xác định ứng dụng
+
+Một gói UDP luôn có:
+
+Source IP
+
+Source Port
+
+Destination IP
+
+Destination Port
+
+-Header UDP rất nhỏ
+
+Header UDP chỉ có 8 bytes:
+
+Source port
+
+Destination port
+
+Length
+
+Checksum
+
+Nên:
+
+Overhead thấp
+
+Nhanh hơn TCP
+
+-UDP không đảm bảo Packet tới nơi, đúng thứ tự, không bị trùng, bên kia đã nhận
+
+7.TCP là giao thức Layer 4 đáng tin cậy
+TCP cung cấp:
+
+Reliability (đảm bảo dữ liệu tới nơi)
+
+Ordered delivery (đúng thứ tự)
+
+Retransmission (gửi lại khi mất gói)
+
+Flow control
+
+Congestion control
+
+TCP là giao thức Stateful
+
+Có lưu trạng thái (state) ở cả client và server.
+
+Có:
+
+Connection
+
+Sequence number
+
+Window size
+
+Buffer state
+
+TCP là giao thức Stream-based
+
+Dữ liệu được xem như một luồng byte liên tục
+
+TCP phải thiết lập kết nối trước khi truyền dữ liệu
+
+Three-way handshake:
+
+SYN
+SYN + ACK
+ACK
+
+Sau đó mới truyền dữ liệu
+
+CP dùng Port để xác định ứng dụng
+
+Mỗi kết nối được xác định bởi:
+
+Source IP
+
+Source Port
+
+Destination IP
+
+Destination Port
+
+(4-tuple)
+
+TCP có Sequence Number
+
+Giúp:
+
+Đảm bảo đúng thứ tự
+
+Phát hiện mất gói
+
+Phát hiện gói trùng lặp
+
+TCP sử dụng ACK
+
+Bên nhận gửi ACK để xác nhận đã nhận dữ liệu
+
+Nếu không nhận được ACK:
+
+TCP tự động retransmit
+
+TCP hỗ trợ Full Duplex
+
+Hai phía có thể gửi và nhận dữ liệu đồng thời
+
+TCP Header mặc định 20 bytes
+
+Chứa:
+
+Source port
+
+Destination port
+
+Sequence number
+
+Acknowledgement number
+
+Window size
+
+Flags (SYN, ACK, FIN, RST,...)
+
+TCP có Flow Control
+
+Dùng Window Size để tránh làm đầy buffer bên nhận
+
+TCP có Congestion Control
+
+Giảm tốc độ gửi khi mạng bị nghẽn.
+
+Đóng kết nối bằng Four-way handshake
+
+FIN
+
+ACK
+
+FIN
+
+ACK
