@@ -1,0 +1,195 @@
+1.First Bad Version dùng binary search để giảm số lần gọi API
+
+Khởi tạo left = 1, right = n
+
+Tính mid = (left + right) / 2
+
+Nếu isBadVersion(mid) là true thì phiên bản lỗi đầu tiên nằm ở mid hoặc bên trái nên dịch right = mid
+
+Nếu isBadVersion(mid) là false thì phiên bản lỗi đầu tiên nằm bên phải nên dịch left = mid + 1
+
+Khi vòng lặp kết thúc left chính là phiên bản lỗi đầu tiên
+
+-Binary search giúp giảm số lần gọi API từ O(n) xuống O(log n)
+
+Đảm bảo tìm chính xác phiên bản lỗi đầu tiên
+
+-Code:
+
+/* The isBadVersion API is defined in the parent class VersionControl.
+      boolean isBadVersion(int version); */
+
+public class Solution extends VersionControl {
+    public int firstBadVersion(int n) {
+        int left = 1;
+        int right = n;
+        
+        // Vòng lặp binary search
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            
+            if (isBadVersion(mid)) {
+                // Nếu mid lỗi thì phiên bản lỗi đầu tiên nằm ở mid hoặc bên trái
+                right = mid;
+            } else {
+                // Nếu mid không lỗi thì phiên bản lỗi đầu tiên nằm bên phải
+                left = mid + 1;
+            }
+        }
+        
+        // Khi left == right thì đây là phiên bản lỗi đầu tiên
+        return left;
+    }
+}
+
+
+2. Peak Index in Mountain Array dùng binary search để đạt O(log n)
+
+Khởi tạo left = 0, right = arr.length - 1
+
+Tính mid = (left + right) / 2
+
+Nếu arr[mid] < arr[mid + 1] thì ta đang ở phía tăng nên dịch left = mid + 1
+
+Ngược lại (arr[mid] > arr[mid + 1]) thì ta đang ở phía giảm nên dịch right = mid
+
+Khi vòng lặp kết thúc left == right chính là chỉ số đỉnh
+
+-Binary search giúp giảm độ phức tạp từ O(n) xuống O(log n)
+
+Đảm bảo tìm đúng đỉnh vì mảng có cấu trúc đặc biệt (tăng rồi giảm)
+
+-Code:
+class Solution {
+    public int peakIndexInMountainArray(int[] arr) {
+        int left = 0;
+        int right = arr.length - 1;
+        
+        // Vòng lặp binary search
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            
+            // Nếu mid nằm ở phía tăng
+            if (arr[mid] < arr[mid + 1]) {
+                left = mid + 1; // dịch sang phải
+            } else {
+                // Nếu mid nằm ở phía giảm
+                right = mid; // dịch sang trái
+            }
+        }
+        
+        // Khi left == right thì đây là chỉ số đỉnh
+        return left;
+    }
+}
+
+3. Find Smallest Letter Greater Than Target dùng binary search để đạt O(log n)
+
+Khởi tạo left = 0, right = letters.length - 1
+
+Tính mid = (left + right) / 2
+
+Nếu letters[mid] <= target thì dịch left = mid + 1
+
+Nếu letters[mid] > target thì dịch right = mid - 1
+
+Sau khi vòng lặp kết thú, left chính là vị trí cần tìm
+
+Nếu left vượt quá độ dài mảng thì trả về letters[0]
+
+-Binary search giúp giảm độ phức tạp từ O(n) xuống O(log n)
+
+Đảm bảo tìm đúng ký tự lớn hơn target một cách nhanh chóng
+
+-Code:
+
+class Solution {
+    public char nextGreatestLetter(char[] letters, char target) {
+        int left = 0;
+        int right = letters.length - 1;
+        
+        // Vòng lặp binary search
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            
+            if (letters[mid] <= target) {
+                // Nếu ký tự mid nhỏ hơn hoặc bằng target thì dịch sang phải
+                left = mid + 1;
+            } else {
+                // Nếu ký tự mid lớn hơn target thì dịch sang trái
+                right = mid - 1;
+            }
+        }
+        
+        // Nếu left vượt quá độ dài mảng thì trả về phần tử đầu tiên
+        return left < letters.length ? letters[left] : letters[0];
+    }
+}
+
+4.HTTP thường từ Client đến request rồi server và từ server về client qua request
+
+-Dữ liệu thường được truyền dưới dạng plain text nên ISP, Router, Hacker ở giữa(MITM) đều có thể đọc được
+
+Cần mã hóa để sinh ra TLS
+
+-HTTPS thực chất là:
+
+HTTPS = HTTP over TLS
+
+Quy trình:
+
+TCP Handshake đến TLS Handshake đến sinh khóa bí mật chung đến mã hóa dữ liệu HTTP đến trao đổi dữ liệu
+
+-TLS không có vị trí cố định thường nằm giữa Application và Transport có thể coi nó là Layer 5 (Session Layer) vì nó có trạng thái (stateful)
+
+-TLS có 2 nhiệm vụ:
+
+Mã hóa (Encryption) người ở giữa không đọc được dữ liệu
+
+Xác thực (Authentication) đảm bảo server là server thật
+
+-Có 2 kiểu mã hoá là:
+
+Symmetric Encryption (Đối xứng)
+
+Dùng cùng một key để Encrypt, Decrypt
+
+Asymmetric Encryption (Bất đối xứng)
+
+Có Public key được chia sẻ, Private key giữ bí mật
+
+-TLS nên dùng cả 2 để kết hợp:
+
+RSA / Diffie-Hellman chỉ dùng để trao đổi khóa
+
+Sau đó AES / ChaCha20 mã hóa dữ liệu thực tế
+
+Vì AES nhanh hơn rất nhiều
+
+-TLS 1.2 (RSA)
+
+ClientHello
+
+Server gửi Certificate + Public Key
+
+Client tạo Premaster Secret và mã hóa bằng Public Key
+
+Server dùng Private Key giải mã
+
+Hai bên sinh ra Symmetric Key
+
+Không có Perfect Forward Secrecy
+
+-Diffie-Hellman (DH/ECDHE)
+
+Hai bên tạo chung một khóa bí mật mà không cần gửi khóa đó qua mạng
+
+Mỗi session có khóa riêng
+
+Có Perfect Forward Secrecy
+
+-TLS 1.3 mặc định dùng ECDHE
+
+Chỉ cần 1 RTT (nhanh hơn TLS 1.2)
+
+Hỗ trợ 0-RTT nếu đã có Pre-Shared Key
