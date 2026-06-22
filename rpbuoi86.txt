@@ -1,0 +1,241 @@
+1. Special Array With X Elements Greater Than or Equal X là tìm số nguyên x sao cho có đúng x phần tử trong mảng ≥ x
+
+Nếu tồn tại thì trả về x  nếu không thì trả về  -1
+
+Sắp xếp mảng để dễ đếm số phần tử ≥ một giá trị
+
+Duyệt qua tất cả các giá trị x từ 1 đến nums.length
+
+Với mỗi x ta kiểm tra số phần tử ≥ x
+
+Nếu đúng bằng x thì trả về x
+
+Nếu duyệt hết không tìm thấy thì trả về -1
+
+-Sau khi sắp xếp ta có thể dễ dàng tính số phần tử ≥ x bằng cách lấy chỉ số trong mảng
+
+Độ phức tạp O(n log n) do bước sắp xếp sau đó duyệt O(n)
+
+-Code:
+
+import java.util.Arrays;
+
+class Solution {
+    public int specialArray(int[] nums) {
+        // Sắp xếp mảng tăng dần
+        Arrays.sort(nums);
+        int n = nums.length;
+        
+        // Duyệt qua tất cả giá trị x từ 1 đến n
+        for (int x = 1; x <= n; x++) {
+            // Tìm số phần tử ≥ x
+            int count = n - lowerBound(nums, x);
+            
+            // Nếu đúng bằng x thì trả về x
+            if (count == x) {
+                return x;
+            }
+        }
+        
+        // Nếu không tìm thấy thì trả về -1
+        return -1;
+    }
+    
+    // Hàm tìm chỉ số đầu tiên có giá trị ≥ target (binary search)
+    private int lowerBound(int[] nums, int target) {
+        int left = 0, right = nums.length;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return left;
+    }
+}
+n
+
+2.Check If N and Its Double Exist là nhiệm vụ cho mảng arr  kiểm tra xem có tồn tại hai chỉ số i và j sao cho i != j, arr[i] == 2 * arr[j]
+
+Có 2 cách giải là duyệt 2 vòng lặp để kiểm tra mọi cặp phần tử. Độ phức tạp O(n²)
+
+Vàdùng HashSet để lưu các phần tử đã duyệt.
+
+Với mỗi phần tử num kiểm tra xem trong set có 2 * num hoặc num / 2 (nếu chia hết)
+
+Nếu có thì trả về true
+
+Nếu không thì thêm num vào set
+
+Nếu duyệt hết không tìm thấy thì trả về false
+
+-HashSet cho phép kiểm tra tồn tại trong O(1)
+
+Độ phức tạp tổng thể O(n) nhanh hơn nhiều so với O(n²)
+
+-Code:
+
+import java.util.HashSet;
+
+class Solution {
+    public boolean checkIfExist(int[] arr) {
+        // Tạo HashSet để lưu các phần tử đã duyệt
+        HashSet<Integer> set = new HashSet<>();
+        
+        // Duyệt qua từng phần tử trong mảng
+        for (int num : arr) {
+            // Kiểm tra xem đã có phần tử thỏa điều kiện chưa
+            if (set.contains(2 * num) || (num % 2 == 0 && set.contains(num / 2))) {
+                return true; // tìm thấy cặp thỏa mãn
+            }
+            // Thêm phần tử hiện tại vào set
+            set.add(num);
+        }
+        
+        // Nếu không tìm thấy cặp nào
+        return false;
+    }
+}
+
+
+3. Intersection of Two Arrays II có 2 cách giải là HashMap và TwoPointer
+
+HashMap cho phép lưu số lần xuất hiện và kiểm tra nhanh trong O(1)
+
+Độ phức tạp tổng thể O(n + m) với n và m là độ dài hai mảng
+
+Two pointers hoạt động tốt khi mảng đã sắp xếp
+
+Độ phức tạp O(n log n) do bước sắp xếp, sau đó duyệt O(n)
+
+Đây là cách tối ưu hơn brute force O(n²) và dễ hiểu khi áp dụng binary search hoặc two pointers
+
+-Code:
+import java.util.*;
+
+class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        // Sắp xếp cả hai mảng
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        
+        int i = 0, j = 0;
+        List<Integer> result = new ArrayList<>();
+        
+        // Dùng two pointers để tìm giao nhau
+        while (i < nums1.length && j < nums2.length) {
+            if (nums1[i] == nums2[j]) {
+                result.add(nums1[i]); // thêm vào kết quả
+                i++;
+                j++;
+            } else if (nums1[i] < nums2[j]) {
+                i++; // dịch con trỏ i
+            } else {
+                j++; // dịch con trỏ j
+            }
+        }
+        
+        // Chuyển danh sách kết quả thành mảng
+        int[] ans = new int[result.size()];
+        for (int k = 0; k < result.size(); k++) {
+            ans[k] = result.get(k);
+        }
+        
+        return ans;
+    }
+}
+
+
+4.-HTTP Request gồm 5 thành phần:
+
+Method (GET, POST, PUT, DELETE,...)
+
+Path
+
+Protocol Version (HTTP/1.0, HTTP/1.1, HTTP/2, HTTP/3)
+
+Headers
+
+Body
+
+GET thường không có body, dữ liệu được truyền qua query parameters trong URL. URL có giới hạn độ dài, trong khi body của POST gần như không bị giới hạn
+
+-HTTP Response gồm 3 thành phần là Status Code (200, 404, 500,...), Headers, Body
+
+-HTTP chạy trên TCP
+
+Quy trình:
+
+Thiết lập TCP connection
+
+Gửi Request
+
+Nhận Response
+
+Đóng connection
+
+HTTPS bổ sung thêm TLS Handshake để trao đổi khóa mã hóa trước khi gửi dữ liệu
+
+-HTTP/1.0
+
+Mỗi request tạo một TCP connection mới rồi đóng ngay sau khi nhận response
+
+Nhược điểm
+
+Độ trễ cao do liên tục thiết lập kết nối
+
+Tốn CPU và tài nguyên
+
+Không hỗ trợ Chunked Transfer Encoding
+
+Không hỗ trợ streaming
+
+Host Header chưa bắt buộc nên không thuận tiện cho nhiều website dùng chung một IP
+
+-HTTP/1.1
+
+Cải tiến chính
+
+Persistent Connection (Keep-Alive) nhiều request dùng chung một connection
+
+Giảm latency và CPU usage
+
+Hỗ trợ Chunked Transfer Encoding để streaming dữ liệu
+
+Host Header trở thành bắt buộc, cho phép nhiều website dùng chung một IP
+
+Có HTTP Pipelining nhưng bị vô hiệu hóa do vấn đề Head-of-Line Blocking và khó đảm bảo thứ tự response qua proxy
+
+-HTTP Request Smuggling
+
+Xảy ra khi proxy và backend hiểu khác nhau về điểm kết thúc của request thường liên quan đến:
+
+Nhiều Content-Length
+
+Content-Length và Transfer-Encoding cùng tồn tại
+
+-HTTP/2
+
+Các cải tiến chính
+
+Header Compression
+
+Multiplexing: nhiều request đồng thời trên cùng một connection
+
+Mỗi request có Stream ID nên response không cần trả về theo thứ tự
+
+Server Push (hiện gần như không còn sử dụng)
+
+Thường chạy cùng TLS
+
+Sử dụng ALPN trong TLS để thương lượng HTTP/2
+
+-HTTP/3
+
+HTTP/3 sử dụng QUIC (UDP + congestion control) thay cho TCP
+
+Mục tiêu
+
+Giải quyết vấn đề Head-of-Line Blocking của TCP trong HTTP/2
