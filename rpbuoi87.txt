@@ -1,0 +1,233 @@
+1.Maximum Average Subarray I dùng sliding window
+
+Tính tổng của k phần tử đầu tiên
+
+Sau đó trượt cửa sổ: mỗi lần bỏ đi phần tử đầu và thêm phần tử mới vào cuối
+
+Cập nhật tổng và so sánh để tìm giá trị lớn nhất
+
+Kết quả = tổng lớn nhất / k
+
+-Sliding window giúp tính nhanh tổng của đoạn con liên tiếp mà không cần tính lại từ đầu
+
+Độ phức tạp O(n) tối ưu hơn nhiều so với cách duyệt mọi đoạn con O(n·k)
+
+-Code:
+
+class Solution {
+    public double findMaxAverage(int[] nums, int k) {
+        // Tính tổng của k phần tử đầu tiên
+        double sum = 0;
+        for (int i = 0; i < k; i++) {
+            sum += nums[i];
+        }
+        
+        // Khởi tạo maxSum bằng tổng đầu tiên
+        double maxSum = sum;
+        
+        // Trượt cửa sổ từ vị trí k đến hết mảng
+        for (int i = k; i < nums.length; i++) {
+            sum += nums[i] - nums[i - k]; // thêm phần tử mới, bỏ phần tử cũ
+            maxSum = Math.max(maxSum, sum); // cập nhật maxSum
+        }
+        
+        // Trả về trung bình lớn nhất
+        return maxSum / k;
+    }
+}
+
+2.Best Time to Buy and Sell Stock dùng one pass (duyệt một lần)
+
+Duyệt qua mảng, luôn lưu giá thấp nhất đã gặp (minPrice)
+
+Với mỗi ngày, tính lợi nhuận nếu bán hôm đó = prices[i] - minPrice
+
+Cập nhật lợi nhuận lớn nhất (maxProfit)
+
+Kết quả cuối cùng là maxProfit
+
+Sliding window ở đây thực chất biến thành one-pass (duyệt một lần), vì ta chỉ cần giữ giá thấp nhất đã gặp và cập nhật lợi nhuận
+
+-One pass chỉ cần duyệt một lần độ phức tạp O(n)
+
+Không cần duyệt mọi cặp ngày O(n²) tiết kiệm thời gian
+
+-Code:
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        // Khởi tạo giá mua thấp nhất và lợi nhuận lớn nhất
+        int minPrice = Integer.MAX_VALUE;
+        int maxProfit = 0;
+        
+        // Duyệt qua từng ngày
+        for (int price : prices) {
+            // Cập nhật giá mua thấp nhất
+            if (price < minPrice) {
+                minPrice = price;
+            }
+            
+            // Tính lợi nhuận nếu bán hôm nay
+            int profit = price - minPrice;
+            
+            // Cập nhật lợi nhuận lớn nhất
+            if (profit > maxProfit) {
+                maxProfit = profit;
+            }
+        }
+        
+        // Trả về lợi nhuận tối đa
+        return maxProfit;
+    }
+}
+
+3.Contains Duplicate II có 2 cách giải là
+
+HashMap / HashSet:
+
+Dùng HashMap lưu giá trị và chỉ số gần nhất
+
+Khi gặp lại giá trị, kiểm tra khoảng cách chỉ số ≤ k
+
+Nếu đúng thì trả về true
+
+và Sliding window + HashSet:
+
+Dùng HashSet để lưu các phần tử trong cửa sổ kích thước k
+
+Nếu gặp phần tử đã tồn tại trong set thì trả về true.
+
+Mỗi lần trượt cửa sổ loại bỏ phần tử cũ (ở vị trí i - k)
+
+-HashSet + sliding window tối ưu vì chỉ lưu tối đa k phần tử
+
+Độ phức tạp O(n) thời gian O(k) không gian
+
+-Code:
+
+import java.util.HashSet;
+
+class Solution {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        // Tạo HashSet để lưu các phần tử trong cửa sổ
+        HashSet<Integer> set = new HashSet<>();
+        
+        for (int i = 0; i < nums.length; i++) {
+            // Nếu phần tử đã tồn tại trong set → có duplicate
+            if (set.contains(nums[i])) {
+                return true;
+            }
+            
+            // Thêm phần tử hiện tại vào set
+            set.add(nums[i]);
+            
+            // Nếu kích thước cửa sổ > k → loại bỏ phần tử cũ
+            if (set.size() > k) {
+                set.remove(nums[i - k]);
+            }
+        }
+        
+        // Không tìm thấy duplicate trong khoảng cách k
+        return false;
+    }
+}
+
+4.WebSocket là giao thức giao tiếp hai chiều (Full-duplex) giữa Client và Server
+
+Xây dựng trên HTTP thông qua cơ chế Upgrade
+
+Sau khi kết nối thành công Client và Server đều có thể gửi dữ liệu bất kỳ lúc nào
+
+-HTTP chỉ hoạt động theo kiểu:
+
+Request tới Response
+
+WebSocket:
+
+Client tới và Server trả về
+
+Cho phép truyền dữ liệu real-time mà không cần polling liên tục
+
+-Bước 1: HTTP Handshake
+
+Client gửi:
+
+GET /chat HTTP/1.1
+
+Upgrade: websocket
+
+Connection: Upgrade
+
+Server trả về:
+
+HTTP/1.1 101 Switching Protocols
+
+Sau đó kết nối HTTP được nâng cấp thành WebSocket
+
+-Không dùng:
+
+http://
+
+https://
+
+Mà dùng:
+
+ws://
+
+wss://
+
+ws://: không mã hóa
+
+wss://: WebSocket qua TLS (an toàn)
+
+-Ưu điểm
+
+Full-duplex
+
+Client và Server gửi dữ liệu đồng thời
+
+Real-time
+
+Không cần polling
+
+HTTP compatible
+
+Hoạt động tốt với firewall và port 80/443
+
+Push notification dễ dàng
+
+-Nhược điểm
+
+Stateful
+
+Server phải lưu trạng thái của từng connection
+
+Khó scale hơn HTTP
+
+Proxy xử lý phức tạp hơn
+
+Connection có thể bị timeout
+
+Cần gửi:
+
+Ping
+
+Pong
+
+định kỳ để giữ kết nối sống
+
+-Chỉ dùng khi thực sự cần:
+
+Bidirectional communication
+
+Real-time
+
+Nếu không:
+
+HTTP thông thường
+
+Long Polling
+
+Server Sent Events (SSE)
+
+sẽ đơn giản và dễ quản lý hơn
