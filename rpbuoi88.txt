@@ -1,0 +1,194 @@
+1.Minimum Recolors to Get K Consecutive Black Blocks dùng sliding window (cửa sổ cố định độ dài k)
+
+Tính số lượng 'W' trong cửa sổ đầu tiên độ dài k
+
+Trượt cửa sổ qua chuỗi: mỗi lần bỏ đi ký tự đầu và thêm ký tự mới vào cuối
+
+Cập nhật số lượng 'W' trong cửa sổ và lấy giá trị nhỏ nhất
+
+Kết quả cuối cùng là số 'W' nhỏ nhất trong một cửa sổ độ dài k
+
+-Sliding window giúp tính nhanh số 'W' trong mỗi đoạn con độ dài k mà không cần đếm lại từ đầu
+
+Độ phức tạp: O(n), tối ưu hơn nhiều so với cách duyệt mọi đoạn con O(n·k)
+
+-Code:
+
+class Solution {
+    public int minimumRecolors(String blocks, int k) {
+        int n = blocks.length();
+        int countW = 0;
+        
+        // Đếm số 'W' trong cửa sổ đầu tiên
+        for (int i = 0; i < k; i++) {
+            if (blocks.charAt(i) == 'W') {
+                countW++;
+            }
+        }
+        
+        // Khởi tạo kết quả bằng số 'W' trong cửa sổ đầu tiên
+        int minRecolors = countW;
+        
+        // Trượt cửa sổ từ vị trí k đến hết chuỗi
+        for (int i = k; i < n; i++) {
+            // Nếu ký tự rời khỏi cửa sổ là 'W' thì giảm countW
+            if (blocks.charAt(i - k) == 'W') {
+                countW--;
+            }
+            // Nếu ký tự mới vào cửa sổ là 'W' thì tăng countW
+            if (blocks.charAt(i) == 'W') {
+                countW++;
+            }
+            // Cập nhật minRecolors
+            minRecolors = Math.min(minRecolors, countW);
+        }
+        
+        return minRecolors;
+    }
+}
+
+2.Defuse the Bomb nếu k == 0 thì trả về mảng toàn số 0.
+
+Nếu k > 0 với mỗi vị trí i tính tổng code[(i+1) % n] + ... + code[(i+k) % n]
+
+Nếu k < 0 với mỗi vị trí i tính tổng code[(i-1+n) % n] + ... + code[(i+k+n) % n]
+
+Dùng toán tử % n để xử lý tính chất vòng tròn
+
+-Bài toán yêu cầu xử lý mảng vòng tròn nên việc dùng % n là cách trực tiếp và dễ hiểu
+
+Độ phức tạp O(n·|k|) nhưng với constraint nhỏ (n ≤ 100) cách này vẫn chạy tốt
+
+-Code:
+
+class Solution {
+    public int[] decrypt(int[] code, int k) {
+        int n = code.length;
+        int[] result = new int[n];
+        
+        // Trường hợp k == 0 thì tất cả phần tử = 0
+        if (k == 0) {
+            return result;
+        }
+        
+        // Trường hợp k > 0 thì tính tổng k phần tử tiếp theo
+        if (k > 0) {
+            for (int i = 0; i < n; i++) {
+                int sum = 0;
+                for (int j = 1; j <= k; j++) {
+                    sum += code[(i + j) % n];
+                }
+                result[i] = sum;
+            }
+        } else {
+            // Trường hợp k < 0 thì tính tổng -k phần tử trước đó
+            int kk = -k;
+            for (int i = 0; i < n; i++) {
+                int sum = 0;
+                for (int j = 1; j <= kk; j++) {
+                    sum += code[(i - j + n) % n];
+                }
+                result[i] = sum;
+            }
+        }
+        
+        return result;
+    }
+}
+
+3.Substring Matching Pattern tách pattern p thành hai phần:
+
+prefix phần trước dấu *
+
+suffix phần sau dấu *
+
+Với mỗi vị trí trong s kiểm tra xem substring bắt đầu từ đó có dạng:
+
+Bắt đầu bằng prefix
+
+Kết thúc bằng suffix
+
+Giữa có thể là bất kỳ chuỗi nào
+
+Nếu tìm thấy thì trả về true. Nếu duyệt hết không thấy thì trả về false
+
+-Bài toán chỉ có một dấu * nên ta chỉ cần tách pattern thành prefix và suffix
+
+Độ phức tạp O(n·m) trong trường hợp xấu nhất (n = độ dài s, m = độ dài p)
+
+-Code:
+
+class Solution {
+    public boolean hasMatch(String s, String p) {
+        // Tìm vị trí của dấu '*'
+        int starIndex = p.indexOf('*');
+        
+        // Tách prefix và suffix
+        String prefix = p.substring(0, starIndex);
+        String suffix = p.substring(starIndex + 1);
+        
+        // Duyệt qua từng vị trí trong s
+        for (int i = 0; i + prefix.length() <= s.length(); i++) {
+            // Nếu substring bắt đầu bằng prefix
+            if (s.startsWith(prefix, i)) {
+                // Tính vị trí bắt đầu của suffix
+                int startSuffix = i + prefix.length();
+                
+                // Kiểm tra xem suffix có nằm trong s sau prefix không
+                if (startSuffix <= s.length() && s.indexOf(suffix, startSuffix) != -1) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+}
+
+4.HTTP/1.1 mỗi TCP connection chỉ xử lý được một request tại một thời điểm
+
+Trình duyệt thường mở khoảng 6 connection/song song để tăng tốc tải tài nguyên
+
+Dễ bị giới hạn bởi số lượng connection
+
+-HTTP/2 sử dụng một TCP connection duy nhất
+
+Hỗ trợ multiplexing: nhiều request/response được truyền đồng thời trên cùng một connection bằng các stream ID
+
+Server không cần trả response theo đúng thứ tự request
+
+Tăng hiệu năng rõ rệt khi tải nhiều tài nguyên cùng lúc
+
+-Ưu điểm của HTTP/2
+
+Giảm số lượng connection ⇒ tiết kiệm tài nguyên
+
+Hỗ trợ multiplexing giúp tăng tốc tải trang
+
+Nén header (HPACK) giúp giảm lượng dữ liệu truyền
+
+Mặc dù không bắt buộc HTTP/2 thường được sử dụng cùng TLS nên an toàn hơn
+
+Hiệu quả với các ứng dụng có nhiều request đồng thời
+
+-Nhược điểm của HTTP/2
+
+TCP Head-of-Line Blocking:
+
+Nếu một packet bị mất các packet phía sau phải chờ dù chúng thuộc các request khác nhau
+
+Xử lý phức tạp hơn:
+
+Phải quản lý stream flow control, phân tách frame,...
+
+Làm tăng mức sử dụng CPU ở backend
+
+Server Push từng được giới thiệu nhưng không phổ biến và gần như đã bị loại bỏ do kém hiệu quả
+
+-Khi nào nên dùng HTTP/2?
+
+ Web page tải nhiều file (HTML, CSS, JS, hình ảnh)
+
+ Có nhiều request đồng thời
+
+ Nếu ứng dụng chỉ gửi ít request và xử lý rất nhanh, HTTP/2 không mang lại nhiều lợi ích, thậm chí còn tăng chi phí CPU
