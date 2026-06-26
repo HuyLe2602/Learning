@@ -1,0 +1,336 @@
+1.API là là cầu nối giúp hai phần mềm giao tiếp với nhau
+
+Mô hình hoạt động:
+
+Client gửi yêu cầu (Request)
+
+Server xử lý yêu cầu
+
+API truyền Request và Response giữa Client và Server
+
+-REST API là tập hợp các quy tắc để xây dựng API hoạt động trên nền Web
+
+API tuân theo các quy tắc của REST được gọi là REST API
+
+
+-REST API hoạt động: 
+
+Client gửi HTTP Request đến Server
+
+Server xử lý yêu cầu
+
+Server trả về HTTP Response cho Client
+
+
+-Các HTTP Method quan trọng
+
+GET là lấy dữ liệu
+
+POST là tạo/thêm dữ liệu mới
+
+PUT là cập nhật dữ liệu
+
+DELETE là xóa dữ liệu
+
+-Dữ liệu trao đổi
+
+REST API thường gửi và nhận dữ liệu bằng JSON
+
+JSON là định dạng dữ liệu đơn giản, dễ đọc và phổ biến
+
+-Vì sao REST API quan trọng?
+
+Cho phép các ứng dụng, website và dịch vụ giao tiếp với nhau
+
+Không phụ thuộc vào ngôn ngữ lập trình hay hệ điều hành
+
+Là nền tảng của hầu hết các ứng dụng web và mobile hiện nay
+
+-Hoàn tất cài đặt các công cụ
+
+2. Number of Substrings Containing All Three Characters dùng Sliding window + two pointers
+
+Dùng hai con trỏ left và right để duyệt chuỗi.
+
+Dùng mảng/bộ đếm để lưu số lượng 'a', 'b', 'c' trong cửa sổ hiện tại
+
+Mỗi khi cửa sổ [left, right] chứa đủ cả 3 ký tự:
+
+Thì tất cả substring bắt đầu từ left và kết thúc từ right đến cuối chuỗi đều hợp lệ
+
+Số lượng substring hợp lệ thêm vào = s.length() - right
+
+Sau đó tăng left để thu hẹp cửa sổ và tiếp tục kiểm tra
+
+Duyệt hết chuỗi, cộng dồn kết quả
+
+-Sliding window giúp ta kiểm tra nhanh đoạn con hiện tại có đủ 'a', 'b', 'c' hay chưa
+
+Độ phức tạp O(n) vì mỗi con trỏ chỉ duyệt qua chuỗi một lần
+
+-Code:
+
+class Solution {
+    public int numberOfSubstrings(String s) {
+        int n = s.length();
+        int[] count = new int[3]; // đếm số lượng 'a', 'b', 'c'
+        int left = 0, result = 0;
+        
+        // Duyệt qua từng ký tự với con trỏ right
+        for (int right = 0; right < n; right++) {
+            count[s.charAt(right) - 'a']++;
+            
+            // Khi cửa sổ có đủ 'a', 'b', 'c'
+            while (count[0] > 0 && count[1] > 0 && count[2] > 0) {
+                // Tất cả substring bắt đầu từ left và kết thúc từ right trở đi đều hợp lệ
+                result += n - right;
+                
+                // Thu hẹp cửa sổ bằng cách bỏ ký tự ở left
+                count[s.charAt(left) - 'a']--;
+                left++;
+            }
+        }
+        
+        return result;
+    }
+}
+
+3.Longest Harmonious Subsequence dùng HashMap để đếm số lần xuất hiện của từng phần tử
+
+Với mỗi phần tử num nếu tồn tại num + 1 trong map thì subsequence hài hòa có thể tạo từ num và num+1
+
+Độ dài subsequence = count[num] + count[num+1]
+
+Lấy giá trị lớn nhất trong tất cả các cặp
+
+Nếu không có cặp nào thỏa mãn thì trả về 0
+
+Two pointers thường áp dụng cho subarray liên tiếp
+
+Nhưng ở đây ta cần tìm subsequence 
+
+Do đó two pointers không thể duyệt liên tiếp để tìm subsequence này
+
+-HashMap cho phép đếm nhanh số lần xuất hiện
+
+Độ phức tạp O(n) thời gian, O(n) không gian
+
+-Code:
+
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public int findLHS(int[] nums) {
+        // HashMap để lưu số lần xuất hiện của từng phần tử
+        Map<Integer, Integer> map = new HashMap<>();
+        
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+        
+        int maxLength = 0;
+        
+        // Duyệt qua từng phần tử trong map
+        for (int key : map.keySet()) {
+            if (map.containsKey(key + 1)) {
+                // Nếu tồn tại key+1 thì tạo subsequence hài hòa
+                int length = map.get(key) + map.get(key + 1);
+                maxLength = Math.max(maxLength, length);
+            }
+        }
+        
+        return maxLength;
+    }
+}
+
+
+4.Longest Continuous Increasing Subsequence dùng two pointers / sliding window:
+
+Dùng biến start để đánh dấu đầu của đoạn tăng liên tiếp
+
+Duyệt qua mảng với con trỏ i:
+
+Nếu nums[i] > nums[i-1] thì tiếp tục tăng
+
+Nếu không thì reset start = i
+
+Tính độ dài hiện tại = i - start + 1
+
+Cập nhật kết quả lớn nhất
+
+-Đây là bài toán liên tiếp nên two pointers/sliding window rất phù hợp
+
+Độ phức tạp O(n) chỉ cần duyệt một lần
+
+-Code:
+
+class Solution {
+    public int findLengthOfLCIS(int[] nums) {
+        if (nums.length == 0) return 0;
+        
+        int maxLen = 1;   // độ dài lớn nhất
+        int start = 0;    // vị trí bắt đầu của đoạn tăng
+        
+        // Duyệt qua mảng
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] > nums[i - 1]) {
+                // tiếp tục tăng
+                maxLen = Math.max(maxLen, i - start + 1);
+            } else {
+                // reset cửa sổ
+                start = i;
+            }
+        }
+        
+        return maxLen;
+    }
+}
+
+5.Grumpy Bookstore Owner dùng Sliding window
+
+Tính tổng số khách luôn hài lòng (những phút grumpy[i] = 0)
+
+Với những phút grumpy[i] = 1, ta có thể “chuyển” họ thành hài lòng nếu dùng bí kíp
+
+Dùng sliding window độ dài minutes để tìm đoạn liên tiếp mà khi áp dụng bí kíp, số khách hài lòng tăng nhiều nhất
+
+Kết quả = số khách luôn hài lòng + số khách tối đa có thể thêm từ đoạn bí kíp
+
+-Bài toán yêu cầu tìm đoạn liên tiếp tối ưu nên dùng sliding window
+
+Độ phức tạp O(n) chỉ cần duyệt một lần
+
+-Code:
+
+class Solution {
+    public int maxSatisfied(int[] customers, int[] grumpy, int minutes) {
+        int n = customers.length;
+        int baseSatisfied = 0; // khách luôn hài lòng
+        
+        // Tính số khách luôn hài lòng
+        for (int i = 0; i < n; i++) {
+            if (grumpy[i] == 0) {
+                baseSatisfied += customers[i];
+            }
+        }
+        
+        // Sliding window: tính số khách có thể thêm khi dùng bí kíp
+        int extra = 0;
+        for (int i = 0; i < minutes; i++) {
+            if (grumpy[i] == 1) {
+                extra += customers[i];
+            }
+        }
+        
+        int maxExtra = extra;
+        
+        // Trượt cửa sổ qua toàn bộ mảng
+        for (int i = minutes; i < n; i++) {
+            if (grumpy[i] == 1) {
+                extra += customers[i]; // thêm khách mới vào cửa sổ
+            }
+            if (grumpy[i - minutes] == 1) {
+                extra -= customers[i - minutes]; // bỏ khách cũ ra khỏi cửa sổ
+            }
+            maxExtra = Math.max(maxExtra, extra);
+        }
+        
+        return baseSatisfied + maxExtra;
+    }
+}
+
+6.Duplicate Zeros dùng Two pointers từ cuối mảng
+
+Đếm số lượng 0 trong mảng
+
+Dùng hai con trỏ:
+
+i: duyệt từ cuối mảng gốc
+
+j: duyệt từ cuối mảng sau khi đã thêm số 0
+
+Khi arr[i] != 0 thì copy sang arr[j]
+
+Khi arr[i] == 0 thì copy hai số 0 liên tiếp sang arr[j] và arr[j-1]
+
+Duyệt ngược để tránh ghi đè dữ liệu chưa xử lý
+
+-Nếu duyệt từ đầu và chèn 0 ta sẽ làm hỏng dữ liệu vì ghi đè
+
+Duyệt từ cuối giúp ta xử lý an toàn, không mất dữ liệu
+
+Độ phức tạp O(n) chỉ duyệt một lần
+
+Không gian O(1) vì làm in-place
+
+-Code:
+
+class Solution {
+    public void duplicateZeros(int[] arr) {
+        int n = arr.length;
+        int zeros = 0;
+        
+        // Đếm số lượng 0
+        for (int num : arr) {
+            if (num == 0) zeros++;
+        }
+        
+        int i = n - 1;       // con trỏ gốc
+        int j = n + zeros - 1; // con trỏ sau khi thêm 0
+        
+        // Duyệt ngược
+        while (i < j) {
+            if (arr[i] != 0) {
+                if (j < n) arr[j] = arr[i]; // copy nếu còn trong phạm vi
+            } else {
+                // Nếu là 0 thì duplicate
+                if (j < n) arr[j] = 0;
+                j--;
+                if (j < n) arr[j] = 0;
+            }
+            i--;
+            j--;
+        }
+    }
+}
+
+7.Flipping an Image dùng Two pointers, với mỗi hang:
+
+Dùng hai con trỏ left và right để đảo ngược
+
+Trong quá trình swap ta đồng thời invert giá trị
+
+Như vậy ta làm cả hai bước trong một vòng lặp
+
+-Nếu làm riêng biệt (flip rồi invert) ta phải duyệt 2 lần
+
+Kết hợp cả hai trong một vòng lặp giúp tối ưu hơn.
+
+Độ phức tạp O(n^2) vì phải duyệt toàn bộ ma trận
+
+Không gian O(1) làm trực tiếp trên mảng
+
+-Code:
+
+class Solution {
+    public int[][] flipAndInvertImage(int[][] image) {
+        int n = image.length;
+        
+        for (int[] row : image) {
+            int left = 0, right = n - 1;
+            
+            while (left <= right) {
+                // Đảo ngược và invert cùng lúc
+                int temp = row[left] ^ 1;   // invert giá trị left
+                row[left] = row[right] ^ 1; // invert giá trị right
+                row[right] = temp;
+                
+                left++;
+                right--;
+            }
+        }
+        
+        return image;
+    }
+}
