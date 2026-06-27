@@ -1,0 +1,228 @@
+1.Reverse Linked List dùng 3 con trỏ
+
+Dùng 3 biến:
+
+prev: trỏ tới node trước đó (ban đầu là null)
+
+curr: trỏ tới node hiện tại (ban đầu là head)
+
+next: lưu node tiếp theo để không mất liên kết
+
+Trong vòng lặp:
+
+Lưu next = curr.next
+
+Đảo chiều liên kết: curr.next = prev
+
+Di chuyển prev = curr, curr = next
+
+Khi curr hết prev chính là head mới của danh sách đảo ngược
+
+-Cách 3 con trỏ này đơn giản, dễ hiểu, không tốn thêm bộ nhớ
+
+Độ phức tạp O(n) thời gian O(1) không gian
+
+-Code:
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseList(ListNode head) {
+        ListNode prev = null;   // node trước đó
+        ListNode curr = head;   // node hiện tại
+        
+        while (curr != null) {
+            ListNode next = curr.next; // lưu node tiếp theo
+            curr.next = prev;          // đảo chiều liên kết
+            prev = curr;               // di chuyển prev
+            curr = next;               // di chuyển curr
+        }
+        
+        return prev; // prev là head mới
+    }
+}
+
+
+2. Merge Two Sorted Lists dùng twopointers 
+
+Dùng một node giả để dễ quản lý kết quả
+
+Dùng con trỏ tail để nối các node mới vào danh sách kết quả
+
+So sánh giá trị của list1 và list2:
+
+Nếu list1.val <= list2.val thì nối list1 vào kết quả di chuyển list1
+
+Ngược lại thì nối list2 di chuyển list2
+
+Khi một danh sách hết nối phần còn lại của danh sách kia
+
+Trả về dummy.next là head của danh sách kết quả
+
+-Two pointers rất phù hợp vì ta chỉ cần duyệt song song hai danh sách đã sắp xếp
+
+Độ phức tạp O(n + m) với n và m là độ dài hai danh sách
+
+-Code:
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        // Node giả để dễ quản lý kết quả
+        ListNode dummy = new ListNode(-1);
+        ListNode tail = dummy;
+        
+        // Duyệt song song hai danh sách
+        while (list1 != null && list2 != null) {
+            if (list1.val <= list2.val) {
+                tail.next = list1;   // nối list1 vào kết quả
+                list1 = list1.next;  // di chuyển list1
+            } else {
+                tail.next = list2;   // nối list2 vào kết quả
+                list2 = list2.next;  // di chuyển list2
+            }
+            tail = tail.next;        // di chuyển tail
+        }
+        
+        // Nối phần còn lại nếu một danh sách hết
+        if (list1 != null) tail.next = list1;
+        if (list2 != null) tail.next = list2;
+        
+        return dummy.next; // head của danh sách kết quả
+    }
+}
+
+3.Linked List Cycle dùng Two Pointers
+
+Dùng hai con trỏ:
+
+slow: di chuyển từng bước
+
+fast: di chuyển hai bước
+
+Nếu danh sách có vòng lặp slow và fast sẽ gặp nhau tại một node nào đó
+
+Nếu fast hoặc fast.next trở thành null nghĩa là danh sách không có vòng lặp
+
+-Đây là cách tối ưu nhất:
+
+Thời gian O(n)
+
+Không gian O(1)
+
+Không cần dùng HashSet để lưu node đã duyệt tiết kiệm bộ nhớ
+
+-Code:
+
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        if (head == null || head.next == null) return false;
+        
+        ListNode slow = head;       // con trỏ đi 1 bước
+        ListNode fast = head.next;  // con trỏ đi 2 bước
+        
+        while (slow != fast) {
+            if (fast == null || fast.next == null) {
+                return false; // nếu fast chạm null thì không có vòng lặp
+            }
+            slow = slow.next;       // đi 1 bước
+            fast = fast.next.next;  // đi 2 bước
+        }
+        
+        return true; // slow và fast gặp nhau thì có vòng lặp
+    }
+}
+
+4.RESTful API là tuân thủ 6 Constraints
+
+Client-Server
+
+Client: gửi request, hiển thị UI
+
+Server: xử lý nghiệp vụ, lưu dữ liệu
+
+Client và Server tách biệt để phát triển độc lập
+
+-Stateless
+
+Server không lưu trạng thái client
+
+Mỗi request độc lập
+
+Request phải chứa đầy đủ thông tin (Token, Data...)
+
+Ưu điểm: dễ scale, dễ restart server
+
+-Cacheable
+
+Response quy định được cache hay không
+
+Cache đến giảm request đến tăng tốc đến giảm tải server
+
+-Uniform Interface
+
+Resource có URL riêng
+
+HTTP Method chuẩn:
+
+GET là Read
+
+POST là Create
+
+PUT là Update
+
+DELETE là Delete
+
+Data Format chuẩn là JSON
+
+Mọi API thiết kế nhất quán
+
+-Layered System
+
+Có thể qua Proxy, Gateway, Load Balancer...
+
+Client không biết các tầng trung gian
+
+Mục đích: Security, Scalability, Load Balancing
+
+-Code on Demand
+
+Server gửi code (JS) cho client thực thi
+
+Ít sử dụng
+
+Không bắt buộc để RESTful
+
+5.Resource là đối tượng dữ liệu trong hệ thống
+
+URI (Uniform Resource Identifier) là địa chỉ của Resource
+
+Sub-resource là dữ liệu thuộc Resource khác
